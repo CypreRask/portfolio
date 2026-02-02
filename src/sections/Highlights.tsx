@@ -1,7 +1,8 @@
 import { Cpu, Network, Dna, ArrowUpRight } from 'lucide-react';
 import { highlights } from '@/data';
 import { GlassCard } from '@/components/ui-custom/GlassCard';
-import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui-custom/AnimatedSection';
+import { AnimatedSection } from '@/components/ui-custom/AnimatedSection';
+import { StaggerContainer, StaggerItem } from '@/components/ui-custom/MotionComponents';
 import { cn } from '@/lib/utils';
 
 const iconMap: Record<string, React.ElementType> = {
@@ -21,28 +22,26 @@ export const Highlights: React.FC = () => {
 
       <div className="relative section-padding max-w-7xl mx-auto">
         <AnimatedSection className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
-            Ce qui me définit
-          </span>
+
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Highlights
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Trois piliers qui structurent mon approche : 
+            Trois piliers qui structurent mon approche :
             des systèmes réels, une IA pragmatique, et une passion pour le vivant.
           </p>
         </AnimatedSection>
 
-        <StaggerContainer 
+        <StaggerContainer
           className="grid md:grid-cols-3 gap-6"
           staggerDelay={0.15}
         >
           {highlights.map((highlight, index) => {
             const Icon = iconMap[highlight.icon];
-            
+
             return (
               <StaggerItem key={highlight.id}>
-                <GlassCard 
+                <GlassCard
                   className="h-full p-6 group"
                   glow={index === 0 ? 'chlorophyll' : index === 1 ? 'amber' : 'none'}
                 >
@@ -87,7 +86,7 @@ export const Highlights: React.FC = () => {
         <AnimatedSection delay={0.5} className="mt-16 text-center">
           <GlassCard className="inline-block max-w-2xl p-6" hover={false}>
             <blockquote className="text-lg italic text-muted-foreground">
-              "La technologie est un moyen, pas une fin. 
+              "La technologie est un moyen, pas une fin.
               Ce qui compte, c'est ce qu'elle permet de comprendre et d'accomplir."
             </blockquote>
           </GlassCard>

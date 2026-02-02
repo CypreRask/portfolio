@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Lock } from 'lucide-react';
 import { projects, type ProjectCategory, type Project } from '@/data';
 import { GlassCard, StatusBadge } from '@/components/ui-custom/GlassCard';
-import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui-custom/AnimatedSection';
+import { AnimatedSection } from '@/components/ui-custom/AnimatedSection';
 import { ProjectModal } from '@/components/ui-custom/ProjectModal';
 import { cn } from '@/lib/utils';
 
@@ -11,7 +11,6 @@ const categories: { id: ProjectCategory | 'all'; label: string }[] = [
   { id: 'all', label: 'Tous' },
   { id: 'iot', label: 'IoT' },
   { id: 'ai', label: 'IA' },
-  { id: 'systems', label: 'Systèmes' },
   { id: 'bio', label: 'Bio' },
   { id: 'finance', label: 'Finance' }
 ];
@@ -56,9 +55,7 @@ export const Projects: React.FC = () => {
     <section id="projects" className="relative py-24">
       <div className="section-padding max-w-7xl mx-auto">
         <AnimatedSection className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
-            Portfolio
-          </span>
+
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Projets
           </h2>
@@ -85,94 +82,92 @@ export const Projects: React.FC = () => {
           ))}
         </AnimatedSection>
 
-        {/* Projects Grid */}
-        <StaggerContainer
+        <motion.div
+          layout
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          staggerDelay={0.1}
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <StaggerItem key={project.id}>
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  id={`project-${project.id}`}
-                  className="h-full"
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                id={`project-${project.id}`}
+                className="h-full"
+              >
+                <GlassCard
+                  className="h-full flex flex-col"
+                  glow={project.isSensitive ? 'amber' : 'chlorophyll'}
+                  onClick={() => openModal(project)}
                 >
-                  <GlassCard
-                    className="h-full flex flex-col"
-                    glow={project.isSensitive ? 'amber' : 'chlorophyll'}
-                    onClick={() => openModal(project)}
-                  >
-                    {/* Header */}
-                    <div className="p-5 flex-1">
-                      <div className="flex items-start justify-between mb-3">
-                        <span className={cn(
-                          'text-xs font-medium uppercase tracking-wider px-2 py-1 rounded',
-                          categoryBgColors[project.category],
-                          categoryColors[project.category]
-                        )}>
-                          {project.category}
-                        </span>
-                        <StatusBadge status={project.status} />
-                      </div>
+                  {/* Header */}
+                  <div className="p-5 flex-1">
+                    <div className="flex items-start justify-between mb-3">
+                      <span className={cn(
+                        'text-xs font-medium uppercase tracking-wider px-2 py-1 rounded',
+                        categoryBgColors[project.category],
+                        categoryColors[project.category]
+                      )}>
+                        {project.category}
+                      </span>
+                      <StatusBadge status={project.status} />
+                    </div>
 
-                      <div className="flex items-start gap-2">
-                        <h3 className="text-lg font-semibold mb-1">
-                          {project.title}
-                        </h3>
-                        {project.isSensitive && (
-                          <Lock className="w-4 h-4 text-amber-500 flex-shrink-0 mt-1" />
-                        )}
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {project.subtitle}
-                      </p>
-
-                      <p className="text-sm text-muted-foreground line-clamp-3">
-                        {project.description}
-                      </p>
-
+                    <div className="flex items-start gap-2">
+                      <h3 className="text-lg font-semibold mb-1">
+                        {project.title}
+                      </h3>
                       {project.isSensitive && (
-                        <p className="text-xs text-amber-500 mt-2 flex items-center gap-1">
-                          <Lock className="w-3 h-3" />
-                          Données masquées — démo avec données synthétiques
-                        </p>
+                        <Lock className="w-4 h-4 text-amber-500 flex-shrink-0 mt-1" />
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      {project.subtitle}
+                    </p>
+
+                    <p className="text-sm text-muted-foreground line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {project.isSensitive && (
+                      <p className="text-xs text-amber-500 mt-2 flex items-center gap-1">
+                        <Lock className="w-3 h-3" />
+                        Données masquées — démo avec données synthétiques
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="p-5 pt-0 mt-auto">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.technologies.slice(0, 4).map((tech, i) => (
+                        <span
+                          key={i}
+                          className="text-xs px-2 py-0.5 rounded bg-white/10 dark:bg-white/5 text-muted-foreground"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="text-xs px-2 py-0.5 rounded bg-white/10 dark:bg-white/5 text-muted-foreground">
+                          +{project.technologies.length - 4}
+                        </span>
                       )}
                     </div>
 
-                    {/* Footer */}
-                    <div className="p-5 pt-0 mt-auto">
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.technologies.slice(0, 4).map((tech, i) => (
-                          <span
-                            key={i}
-                            className="text-xs px-2 py-0.5 rounded bg-white/10 dark:bg-white/5 text-muted-foreground"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies.length > 4 && (
-                          <span className="text-xs px-2 py-0.5 rounded bg-white/10 dark:bg-white/5 text-muted-foreground">
-                            +{project.technologies.length - 4}
-                          </span>
-                        )}
-                      </div>
-
-                      <button className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-                        Voir le case study
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </GlassCard>
-                </motion.div>
-              </StaggerItem>
+                    <button className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+                      Voir le case study
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </GlassCard>
+              </motion.div>
             ))}
           </AnimatePresence>
-        </StaggerContainer>
+        </motion.div>
 
         {/* Empty state */}
         {filteredProjects.length === 0 && (

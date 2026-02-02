@@ -42,9 +42,7 @@ export const Contact: React.FC = () => {
 
       <div className="relative section-padding max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
-            Contact
-          </span>
+
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Proposez un défi
           </h2>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, ChevronDown, Sparkles, Cpu, Brain, Leaf, Code, Layers } from 'lucide-react';
+import { Github, Sparkles, Cpu, Brain, Leaf, Code, Layers } from 'lucide-react';
 import { personalInfo, heroStats } from '@/data';
 import { GlassCard } from '@/components/ui-custom/GlassCard';
 import { NetworkBackground } from '@/components/ui-custom/Background';
@@ -8,10 +8,6 @@ import { cn } from '@/lib/utils';
 export const Hero: React.FC = () => {
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollToSkills = () => {
-    document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -67,18 +63,18 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+              className="flex items-center gap-3 sm:gap-4"
             >
               <button
                 onClick={scrollToProjects}
                 className={cn(
-                  'inline-flex items-center gap-2 px-6 py-3 rounded-xl',
-                  'bg-primary text-primary-foreground font-medium',
+                  'inline-flex items-center gap-2 px-4 py-3 sm:px-6 rounded-xl flex-1 sm:flex-none justify-center whitespace-nowrap',
+                  'bg-primary text-primary-foreground font-medium text-sm sm:text-base',
                   'hover:bg-primary/90 transition-colors btn-shine'
                 )}
               >
-                <Cpu className="w-5 h-5" />
-                Voir les projets
+                <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
+                Projets
               </button>
 
               <a
@@ -86,12 +82,12 @@ export const Hero: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'inline-flex items-center gap-2 px-6 py-3 rounded-xl',
-                  'glass text-foreground font-medium',
+                  'inline-flex items-center gap-2 px-4 py-3 sm:px-6 rounded-xl flex-1 sm:flex-none justify-center whitespace-nowrap',
+                  'glass text-foreground font-medium text-sm sm:text-base',
                   'hover:bg-white/20 dark:hover:bg-white/10 transition-colors'
                 )}
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-4 h-4 sm:w-5 sm:h-5" />
                 GitHub
               </a>
             </motion.div>
@@ -205,27 +201,6 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <button
-            onClick={scrollToSkills}
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <span className="text-sm">Découvrir</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ChevronDown className="w-5 h-5" />
-            </motion.div>
-          </button>
-        </motion.div>
       </div>
     </section>
   );

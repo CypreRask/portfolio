@@ -206,7 +206,7 @@ export const projects: Project[] = [
       'IA : Orchestration complexe (Cascade, Fallback, Circuit Breaker)',
       'Data Engineering : Pipeline de validation strict (Pydantic, SHA-256)',
       'Finance : Modélisation multi-devises & Audit trail complet',
-      'DevOps : Gestion de la persistance fichier (JSONL) vs Base de donnée'
+      'DevOps : Gestion de la persistance fichier (JSONL) vs Base de données'
     ],
     technologies: ['Python', 'Flask', 'JSONL', 'CQRS', 'Pydantic', 'Jinja2', 'Perplexity', 'Gemini', 'Mistral'],
     links: []

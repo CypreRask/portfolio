@@ -48,12 +48,10 @@ export const SystemMap: React.FC = () => {
   }, [activeStage]);
 
   return (
-    <section id="system-map" className="relative py-24 overflow-hidden">
+    <section id="system-map" className="relative py-24 overflow-hidden hidden lg:block">
       <div className="section-padding max-w-7xl mx-auto">
         <AnimatedSection className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
-            Architecture
-          </span>
+
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             System Map
           </h2>
@@ -119,7 +117,7 @@ export const SystemMap: React.FC = () => {
 
                       {/* Description on hover/active */}
                       <AnimatePresence>
-                        {(isActive || window.innerWidth < 1024) && (
+                        {isActive && (
                           <motion.p
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}

@@ -1,7 +1,8 @@
 import { Cpu, Radio, Server, BarChart3, Brain, Monitor, Dna } from 'lucide-react';
 import { skills } from '@/data';
 import { GlassCard } from '@/components/ui-custom/GlassCard';
-import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui-custom/AnimatedSection';
+import { AnimatedSection } from '@/components/ui-custom/AnimatedSection';
+import { StaggerContainer, StaggerItem } from '@/components/ui-custom/MotionComponents';
 import { cn } from '@/lib/utils';
 
 const iconMap: Record<string, React.ElementType> = {
@@ -19,9 +20,6 @@ export const Skills: React.FC = () => {
     <section id="skills" className="relative py-24 overflow-hidden">
       <div className="section-padding max-w-6xl mx-auto">
         <AnimatedSection className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-primary/10 text-primary mb-4">
-            Ce que je sais faire
-          </span>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Compétences
           </h2>
@@ -73,6 +71,6 @@ export const Skills: React.FC = () => {
           })}
         </StaggerContainer>
       </div>
-    </section>
+    </section >
   );
 };
