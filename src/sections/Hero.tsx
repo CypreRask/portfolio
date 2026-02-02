@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, ChevronDown, Sparkles, Cpu, Brain, Leaf, Code } from 'lucide-react';
+import { Github, ChevronDown, Sparkles, Cpu, Brain, Leaf, Code, Layers } from 'lucide-react';
 import { personalInfo, heroStats } from '@/data';
 import { GlassCard } from '@/components/ui-custom/GlassCard';
 import { NetworkBackground } from '@/components/ui-custom/Background';
@@ -143,7 +143,7 @@ export const Hero: React.FC = () => {
                   className="w-24 h-24 rounded-full flex items-center justify-center glow-chlorophyll"
                   hover={false}
                 >
-                  <Brain className="w-10 h-10 text-primary" />
+                  <Layers className="w-10 h-10 text-primary" />
                 </GlassCard>
               </div>
 

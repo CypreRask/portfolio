@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: personalInfo.linkedin,
+      value: 'Mathis Steinmann',
       href: `https://${personalInfo.linkedin}`,
       color: 'hover:text-blue-500'
     },
