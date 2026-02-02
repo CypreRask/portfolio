@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# Mathis Steinmann — Architecte de Systèmes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Étudiant L2 Sciences de la Vie** & **Concepteur IoT/IA**
+> *Nice, Université Côte d'Azur*
 
-Currently, two official plugins are available:
+Ce portfolio présente mes projets en **IoT**, **Biologie** et **Intelligence Artificielle**.
+Je ne suis pas simplement développeur, je conçois des systèmes complets : du capteur physique à l'interface utilisateur, en passant par l'orchestration d'IA.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🛠️ Stack Technique
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Frontend** : React, TypeScript, TailwindCSS, Framer Motion
+*   **Architecture** : Event-Driven, CQRS, LoRaWAN
+*   **IA** : Orchestration Multi-LLM, RAG, Vision (YOLO)
+*   **IoT** : ESP32, Raspberry Pi, MQTT
 
-## Expanding the ESLint configuration
+## 🚀 Projets Phares
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🐝 Ruche Connectée Intelligente
+Système autonome de surveillance apicole avec détection de frelons par vision IA et télémétrie LoRaWAN.
+*   *Stack : Python, YOLOv11 NCNN, FastAPI, SvelteKit*
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🧠 SmartRecall
+Plateforme d'apprentissage cognitif utilisant le RAG et une cascade d'IA pour la génération de contenu personnalisé.
+*   *Stack : PostgreSQL (pgvector), HDBSCAN, LLM Orchestration*
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### ♻️ Composteur Connecté V2
+Suivi biologique en temps réel avec optimisation énergétique extrême et trames binaires compactes.
+*   *Stack : ESP32, LoRa, MQTT, SQLModel*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📦 Installation & Développement
+
+```bash
+# Clone the repository
+git clone https://github.com/CypreRask/portfolio.git
+
+# Install dependencies
+npm install
+
+# Start local server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📬 Contact
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Je suis toujours à la recherche de **défis techniques complexes** (IoT, Data, Bio).
+*   [LinkedIn](https://www.linkedin.com/in/mathis-steinmann-93b5851b9)
+*   [Email](mailto:mathis.steinmann@outlook.fr)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*Généré et architecturé par Mathis Steinmann. Propulsé par une collaboration Humain-IA.*
