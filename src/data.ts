@@ -376,7 +376,7 @@ export const heroStats = [
 export const navItems = [
   { label: 'Accueil', href: '#hero' },
   { label: 'Compétences', href: '#skills' },
-  { label: 'System Map', href: '#system-map' },
+  { label: 'Architecture', href: '#system-map' },
   { label: 'Projets', href: '#projects' },
   { label: 'Contact', href: '#contact' }
 ];
