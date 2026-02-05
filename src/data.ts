@@ -135,8 +135,8 @@ export const projects: Project[] = [
     subtitle: 'Réhabilitation & Monitoring IoT',
     category: 'iot',
     status: 'deployed',
-    description: 'Projet de L2 : Remise en état d\'un sismographe de laboratoire déconnecté pour le rendre accessible via le web. Collaboration avec Irem Su Cone (Projet initial) et Alex Rognone (DB/Connectivité), sous la supervision de Didier Orlandi. J\'ai piloté le diagnostic matériel, la réparation de la chaîne d\'acquisition analogique, la calibration métrologique (validation par séismes connus) et l\'architecture IoT complète pour transformer un appareil "muet" en station de mesure connectée.',
-    problem: 'Matériel existant déconnecté et inexploitable (signal bruité, non calibré). Nécessité de moderniser l\'instrument pour l\'enseignement et la recherche sans racheter de matériel.',
+    description: 'Projet de  Remise en état d\'un sismographe de laboratoire déconnecté pour le rendre accessible via le web. Collaboration avec Irem Su Cone (Projet initial) et Alex Rognone (DB/Connectivité), sous la supervision de Didier Orlandi. J\'ai réparé, connecté et calibré le dispositif ',
+    problem: 'Matériel existant déconnecté et inexploitable (cassé). Nécessité de moderniser l\'instrument pour l\'enseignement et la recherche sans racheter de matériel.',
     solution: 'Approche "Retrofit IoT" : Réparation physique du conditionneur de signal, calibration rigoureuse, et ajout d\'une couche Edge (Raspberry Pi) pour numériser et transmettre les données en temps réel aux infrastructures universitaires.',
     architecture: [
       'Diagnostic & réparation électronique (conditionnement analogique)',
