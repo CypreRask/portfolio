@@ -121,7 +121,7 @@ export const Contact: React.FC = () => {
             </div>
 
             <p className="text-sm text-muted-foreground text-center">
-              © 2026 {personalInfo.name}. Construit avec React, TypeScript & Tailwind — et généré avec l'aide précieuse de l'IA.
+              © 2026 {personalInfo.name}. Construit avec React, TypeScript & Tailwind, avec l'aide de l'IA.
             </p>
 
             <div className="flex items-center gap-4">

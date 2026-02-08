@@ -80,7 +80,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   {project.isSensitive && (
                     <p className="text-sm text-amber-500 mt-2 flex items-center gap-1">
                       <Lock className="w-4 h-4" />
-                      Données masquées — démonstration avec données synthétiques uniquement
+                      Projet privé — données masquées (démo synthétique à venir)
                     </p>
                   )}
                 </div>

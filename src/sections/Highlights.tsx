@@ -24,7 +24,7 @@ export const Highlights: React.FC = () => {
         <AnimatedSection className="text-center mb-16">
 
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Highlights
+            Points forts
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Trois piliers qui structurent mon approche :

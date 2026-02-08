@@ -19,15 +19,15 @@ Je ne suis pas simplement développeur, je conçois des systèmes complets : du 
 
 ### 🐝 Ruche Connectée Intelligente
 Système autonome de surveillance apicole avec détection de frelons par vision IA et télémétrie LoRaWAN.
-*   *Stack : Python, YOLOv11 NCNN, FastAPI, SvelteKit*
+*   *Stack : Python, YOLO (edge), FastAPI*
 
 ### 🧠 SmartRecall
 Plateforme d'apprentissage cognitif utilisant le RAG et une cascade d'IA pour la génération de contenu personnalisé.
-*   *Stack : PostgreSQL (pgvector), HDBSCAN, LLM Orchestration*
+*   *Stack : PostgreSQL (pgvector), orchestration IA*
 
 ### ♻️ Composteur Connecté V2
 Suivi biologique en temps réel avec optimisation énergétique extrême et trames binaires compactes.
-*   *Stack : ESP32, LoRa, MQTT, SQLModel*
+*   *Stack : ESP32, LoRaWAN, MQTT, FastAPI*
 
 ---
 
@@ -51,4 +51,4 @@ Je suis toujours à la recherche de **défis techniques complexes** (IoT, Data, 
 *   [Email](mailto:mathis.steinmann@outlook.fr)
 
 ---
-*Généré et architecturé par Mathis Steinmann. Propulsé par une collaboration Humain-IA.*
+*Construit par Mathis Steinmann, avec l'aide de l'IA.*

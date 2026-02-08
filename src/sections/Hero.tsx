@@ -19,7 +19,8 @@ export const Hero: React.FC = () => {
       <NetworkBackground />
 
       {/* Content */}
-      <div className="relative z-10 section-padding w-full max-w-6xl mx-auto py-20">
+      {/* Extra top padding to avoid overlap with the fixed navbar */}
+      <div className="relative z-10 section-padding w-full max-w-6xl mx-auto pt-32 sm:pt-36 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text content */}
           <div className="space-y-8">

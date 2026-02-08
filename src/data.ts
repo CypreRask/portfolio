@@ -49,24 +49,27 @@ export const projects: Project[] = [
     subtitle: 'IoT full stack — monitoring biologique',
     category: 'iot',
     status: 'wip',
-    description: 'Système complet de monitoring de composteur : ESP32 avec multiplexage capteurs (SCD41, AHT20, NPK RS485, MQ137/4/7), gestion énergie par MOSFET et préchauffe, trame binaire avec CRC. Récepteur Heltec LoRa 32 V3 en LoRaWAN OTAA vers TTN, backend Python FastAPI/SQLModel/SQLite, dashboard web Svelte et prédiction ML simple.',
-    problem: 'Le compostage urbain manque de feedback en temps réel. Les capteurs multiples posent problème de consommation et de fiabilité des données.',
-    solution: 'Architecture modulaire avec gestion fine de l\'énergie (sleep profond, préchauffe capteurs gaz), trame binaire compacte, pipeline complet jusqu\'à la prédiction.',
+    description: 'Projet solo de suivi de compost réalisé pour la Mission Éco-Responsable de l\'Université Côte d\'Azur (UniCA). Une V1 a été déployée sur site pendant un temps (retours terrain), et la V2 est en cours avec davantage de capteurs et un objectif pédagogique : suivre les phases du compost et comparer des protocoles d\'apports (ex: compost incluant des agrumes). Pipeline : capteurs → LoRaWAN (Heltec LoRa 32 V3) → TTN → MQTT → API FastAPI → stockage SQLite (compost.db via SQLModel) → dashboard → analyses et prédictions (Pandas/Scikit-learn).',
+    problem: 'L\'évaluation “à l’œil” fonctionne, mais elle ne suffit pas pour comparer objectivement des protocoles d\'apports ni pour surveiller finement la dynamique (tendances, anomalies, signaux faibles).',
+    solution: 'Instrumenter le composteur, centraliser les mesures dans une API + base locale, puis produire des visualisations et des prédictions simples pour interpréter l\'évolution et comparer des protocoles d\'apports.',
     architecture: [
       'ESP32 : multiplexage capteurs + gestion énergie (MOSFET, sleep)',
       'Trame binaire compacte avec CRC pour intégrité',
-      'Heltec LoRa 32 V3 → LoRaWAN OTAA → TTN → MQTT',
-      'Backend FastAPI + SQLModel + SQLite',
-      'Dashboard Svelte + prédiction ML (tendance température)'
+      'Heltec LoRa 32 V3 → LoRaWAN → TTN → MQTT',
+      'Backend FastAPI (Python) : endpoints + pipeline d\'ingestion',
+      'SQLite (compost.db) via SQLModel',
+      'Dashboard web : visualisation, export et suivi des phases',
+      'Data/ML : Pandas + Scikit-learn (prédictions simples)'
     ],
     demonstrations: [
       'Électronique analogique : conditionnement, multiplexage, énergie',
-      'LoRa/LoRaWAN : OTAA, trame binaire, payload decoder',
-      'Backend API : REST, modèles SQLModel, migrations',
-      'Données/ML : série temporelle, prédiction simple',
+      'IoT/LoRaWAN : payload, intégration TTN → MQTT, robustesse terrain',
+      'Backend API : REST, modèles de données (SQLModel), persistance SQLite',
+      'Données : séries temporelles, visualisation, indicateurs de phase',
+      'ML : features simples + modèles Scikit-learn pour prédiction/tendance',
       'Intégration système : bout en bout, du capteur à l\'UI'
     ],
-    technologies: ['ESP32', 'C++', 'LoRaWAN', 'TTN', 'MQTT', 'FastAPI', 'SQLModel', 'SQLite', 'Svelte', 'Python'],
+    technologies: ['ESP32', 'LoRaWAN', 'Monitoring', 'FastAPI', 'SQLite', 'Data/ML'],
     links: [
       { label: 'GitHub', url: 'https://github.com/CypreRask/Composteur-public' }
     ]
@@ -74,28 +77,27 @@ export const projects: Project[] = [
   {
     id: 'ruche-jpo',
     title: 'Ruche Connectée Intelligente',
-    subtitle: 'Système complet de monitoring apicole avec détection IA en temps réel',
+    subtitle: 'Télémétrie LoRaWAN + vision (abeilles / frelons)',
     category: 'iot',
     status: 'wip',
-    description: 'Système autonome de surveillance de ruche combinant capteurs LoRaWAN, backend temps réel et vision par ordinateur. Pipeline complet : capteurs environnementaux (température, humidité, poids) pour la santé de la colonie, et "Sentinel" visuelle pour la détection de menaces (Frelons). Actuellement sur carte autonome (CanMV ou Raspberry Pi), le système vise une autonomie énergétique totale, bien que ce soit encore un défi technique majeur en cours de développement.',
-    problem: 'Les apiculteurs perdent des colonies à cause des frelons asiatiques. La surveillance visuelle manuelle est chronophage et la détection tardive. Besoin d\'un système autonome capable de détecter les intrusions en temps réel et d\'alerter instantanément.',
-    solution: 'Architecture modulaire full-stack : Capteurs LoRaWAN indépendants pour la télémétrie (basse conso), et Pipeline vidéo flexible (YOLOv11 quantifié NCNN) pour la détection. Hybridation possible entre analyse déportée (Edge) ou centralisée (Serveur) selon les contraintes énergétiques.',
+    description: 'Au sein du fablab, projet de ruche connectée repris d\'un projet initié dans un cadre pédagogique (encadrement Didier Orlandi). Une première version avait déjà été testée avant moi ; je développe et itère surtout la brique vision. Objectif : combiner télémétrie (température, humidité, poids) et détection vidéo (abeilles / frelons) pour suivre l\'activité et déclencher des alertes. Actuellement en phase labo, avec extension prévue vers des capteurs audio.',
+    problem: 'La surveillance manuelle est chronophage et la détection de situations à risque (ex: présence de frelons) arrive trop tard. Il faut un système autonome qui mesure l\'état de la ruche et détecte visuellement des événements, sous fortes contraintes d\'énergie et de connectivité.',
+    solution: 'Architecture modulaire : capteurs LoRaWAN (ABP) pour la télémétrie basse conso + pipeline YOLO pour la détection (PC ou embarqué sur Raspberry Pi via NCNN). Les données et événements sont centralisés via TTN/MQTT et une API temps réel, puis visualisés sur un dashboard Svelte.',
     architecture: [
-      'Capteurs LoRaWAN ABP → TTN → MQTT (Temp/Hum/Poids)',
-      'Backend FastAPI : REST API + WebSocket (Diffusion temps réel)',
-      'Vision : YOLOv11 NCNN (Server ou Edge) + Overlay',
-      'Dashboard SvelteKit : Live stream + Données + Alertes',
-      'Notifications Push multicanal lors de détection Frelon'
+      'Capteurs (temp/hum/poids) → LoRaWAN ABP → TTN → MQTT',
+      'Backend FastAPI : ingestion télémétrie + événements vision',
+      'Temps réel : WebSocket (diffusion des mesures/alertes)',
+      'Vision : YOLO (plusieurs modèles) ; exécution PC ou Raspberry Pi (NCNN)',
+      'Dashboard Svelte : données, alertes, historique'
     ],
     demonstrations: [
-      'Vision par ordinateur : pipeline complet (modèle → optimisation Edge → inférence temps réel)',
-      'IoT/RF : LoRaWAN ABP, gestion payload, downlink, autonomie énergétique',
-      'Backend temps réel : REST + WebSocket simultanés, gestion multi-sources',
-      'Intégration système : coordination multi-services (capteurs, vidéo, API, UI)',
-      'Optimisation Edge : quantification YOLO (NCNN INT8) pour Raspberry Pi (~5 FPS)',
-      'UX temps réel : streaming bidirectionnel (données + vidéo + événements)'
+      'Vision par ordinateur : dataset → entraînement → export/optimisation → inférence',
+      'Déploiement multi-cibles : PC (labo) et edge (Raspberry Pi via NCNN)',
+      'IoT/RF : LoRaWAN ABP, payload, intégration TTN → MQTT',
+      'Backend temps réel : REST + WebSocket, agrégation multi-sources',
+      'Frontend : dashboard Svelte orienté monitoring + alertes'
     ],
-    technologies: ['YOLOv11', 'NCNN', 'OpenCV', 'LoRaWAN', 'TTN', 'MQTT', 'FastAPI', 'WebSocket', 'SvelteKit', 'Raspberry Pi', 'Python', 'Edge Computing'],
+    technologies: ['LoRaWAN', 'Vision IA', 'Temps réel', 'Edge', 'Dashboard', 'YOLO'],
     links: [
       { label: 'GitHub', url: 'https://github.com/CypreRask/Ruche-public' }
     ]
@@ -105,26 +107,25 @@ export const projects: Project[] = [
     title: 'SmartRecall — Plateforme d\'Apprentissage Cognitif',
     subtitle: 'Répétition espacée augmentée par IA et analyse sémantique',
     category: 'ai',
-    status: 'wip',
-    description: 'Système d\'apprentissage adaptatif combinant algorithme de répétition espacée (SM-2), génération de contenu par IA multi-provider et analyse sémantique (RAG). Architecture full-stack avec 50+ tables PostgreSQL, vector search (pgvector), ML clustering (HDBSCAN), et frontend temps réel (SvelteKit). Pipeline complet de l\'ingestion de documents PDF/DOCX à la recommandation personnalisée.',
+    status: 'prototype',
+    description: 'Plateforme d\'apprentissage adaptatif combinant répétition espacée, génération assistée par IA et recherche sémantique (RAG). Architecture full-stack avec PostgreSQL + recherche vectorielle (pgvector), ingestion de documents et interface web.',
     problem: 'L\'apprentissage classique ignore les connexions sémantiques entre concepts, les patterns d\'erreurs récurrents et l\'optimisation temporelle. Les outils existants (Anki) sont statiques et ne modélisent pas la compréhension dynamiquement.',
-    solution: 'Architecture cognitive hybride : RAG Engine pour l\'ingestion, Neural Knowledge Graph pour la modélisation probabiliste de la maîtrise, et ML Error Engine pour détecter les patterns d\'échec via clustering HDBSCAN sur vecteurs hybrides.',
+    solution: 'Architecture cognitive : moteur RAG pour l\'ingestion/recherche, modèle de progression (répétition espacée + signaux), et génération de quiz structurée avec validation.',
     architecture: [
-      'RAG Engine : Ingestion → chunking sémantique → embeddings 768d → vector search',
-      'Neural Knowledge Graph : Modélisation probabiliste (Vecteur d\'état + Propagation bayésienne)',
-      'ML Error Engine : Clustering HDBSCAN sur vecteurs hybrides (texte + math) pour détection patterns',
-      'Cascade IA Multi-Provider : Orchestration 6 LLMs (Cerebras, Groq, Mistral, Gemini) avec fallback',
-      'Quiz Engine : Mega-prompts (Bloom) → validation JSON/schéma → vérification IA'
+      'Ingestion : documents → découpage → embeddings → recherche vectorielle (pgvector)',
+      'Moteur de progression : SM-2 + signaux d\'erreurs (ajustement adaptatif)',
+      'Orchestration IA multi-provider : génération + fallback + contrôle des coûts',
+      'Quiz Engine : génération structurée (JSON) + validation de schéma',
+      'API + UI : endpoints REST, vues et retours utilisateur'
     ],
     demonstrations: [
-      'Architecture distribuée : Microservices, RBAC, API REST, WebSocket temps réel',
-      'Machine Learning : Embeddings, clustering (HDBSCAN/KMeans), cold start, vecteurs hybrides',
-      'Graphes & Probabilités : Propagation bayésienne, similarité cosine, état cognitif',
-      'NLP/RAG : Chunking sémantique, vector search, retrieval-augmented generation',
-      'Orchestration IA : Cascade multi-provider (6 LLMs), rate limiting, fallback, coûts',
-      'Data Engineering : PostgreSQL avancé (50+ tables), pgvector, migrations, pipelines ETL'
+      'NLP/RAG : chunking, embeddings, recherche vectorielle, citations',
+      'Orchestration IA : multi-provider, rate limiting, fallback',
+      'Backend : API, modèles de données, migrations',
+      'Data : PostgreSQL + pgvector, requêtes et indexation',
+      'Produit : boucle feedback (révisions, erreurs, difficulté)'
     ],
-    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'pgvector', 'SvelteKit', 'HDBSCAN', 'D3.js', 'Docker', 'RAG', 'LLM Cascade'],
+    technologies: ['RAG', 'Répétition espacée', 'IA', 'Vector DB', 'Web', 'PostgreSQL'],
     links: [
       { label: 'App Live', url: 'https://app.smart-recall.app/' }
     ]
@@ -132,29 +133,29 @@ export const projects: Project[] = [
   {
     id: 'sismographe',
     title: 'Sismographe Universitaire',
-    subtitle: 'Réhabilitation & Monitoring IoT',
+    subtitle: 'Réparation & mise en ligne des données',
     category: 'iot',
     status: 'deployed',
-    description: 'Projet de  Remise en état d\'un sismographe de laboratoire déconnecté pour le rendre accessible via le web. Collaboration avec Irem Su Cone (Projet initial) et Alex Rognone (DB/Connectivité), sous la supervision de Didier Orlandi. J\'ai réparé, connecté et calibré le dispositif ',
-    problem: 'Matériel existant déconnecté et inexploitable (cassé). Nécessité de moderniser l\'instrument pour l\'enseignement et la recherche sans racheter de matériel.',
-    solution: 'Approche "Retrofit IoT" : Réparation physique du conditionneur de signal, calibration rigoureuse, et ajout d\'une couche Edge (Raspberry Pi) pour numériser et transmettre les données en temps réel aux infrastructures universitaires.',
+    description: 'Au sein du fablab, le laboratoire Géoazur (UniCA) a confié des sismographes à remettre en état et à connecter pour rendre les données accessibles. Un travail initial avait été mené par Irem Su Cone sur un sismographe fonctionnel ; ensuite, j\'ai remis en route la chaîne côté acquisition et exploitation des données : réparation d\'un sismographe mécaniquement cassé, amélioration du programme d\'acquisition (Python), sortie des données via MQTT et construction d\'une interface web de visualisation. Puis, avec Didier Orlandi (encadrement) et Alex (base de données), l\'ensemble a été porté sur Raspberry Pi avec persistance en MariaDB. Le site public final a été réalisé par Didier Orlandi à partir de ma base web et est maintenant en ligne.',
+    problem: 'Instrument(s) non opérationnel(s) et données difficilement accessibles. Objectif : remettre en service, extraire les mesures et les rendre consultables via le web pour l\'enseignement.',
+    solution: 'Réparation + acquisition (Python), publication des mesures via MQTT, persistance sur Raspberry Pi (MariaDB) et visualisation web.',
     architecture: [
-      'Diagnostic & réparation électronique (conditionnement analogique)',
-      'Calibration capteur sismique (référence événements connus)',
-      'Raspberry Pi : acquisition + traitement + MQTT Publisher',
-      'Backend : stockage événements (SQL) + API REST',
-      'Frontend : dashboard prototype (WebSocket) -> Site final par D. Orlandi'
+      'Réparation mécanique (sismographe cassé) + remise en service',
+      'Acquisition/formatage des mesures (Python)',
+      'Publication des données via MQTT',
+      'Raspberry Pi : déploiement et persistance',
+      'Base de données : MariaDB (mise en place Alex)',
+      'Interface web : visualisation (base initiale), puis site public final par Didier Orlandi'
     ],
     demonstrations: [
-      'Électronique : diagnostic, réparation, conditionnement signal analogique',
-      'Instrumentation : calibration capteur, validation métrologique',
-      'IoT : Raspberry Pi, MQTT, pipeline données temps réel',
-      'Collaboration : gestion projet en équipe (Alex Rognone, Irem Su Cone)',
-      'Intégration : de l\'instrumentation physique au monitoring web'
+      'Réparation : remise en état d\'un instrument mécaniquement cassé',
+      'Intégration bout-en-bout : acquisition → MQTT → stockage → web',
+      'Web : monitoring et visualisation',
+      'Collaboration : coordination fablab ↔ labo ↔ encadrement'
     ],
-    technologies: ['Raspberry Pi', 'MQTT', 'Python', 'ObsPy', 'SQL', 'WebSocket', 'Calibration', 'Électronique analogique', 'Travail d\'équipe'],
+    technologies: ['Réparation', 'Raspberry Pi', 'MQTT', 'MariaDB', 'Monitoring web', 'Université'],
     links: [
-      { label: 'Site Live (UniCA)', url: 'https://eftis.univ-cotedazur.fr/sismographe/' }
+      { label: 'Site public (UniCA)', url: 'https://eftis.univ-cotedazur.fr/sismographe/' }
     ]
   },
   {
@@ -181,7 +182,7 @@ export const projects: Project[] = [
       'Biologie appliquée : modélisation physique de processus neurophysiologiques',
       'UX éducative : feedback visuel immédiat, manipulation intuitive'
     ],
-    technologies: ['Électronique analogique', 'Conception modulaire', 'Pédagogie', 'Neurophysiologie', 'Design Tangible'],
+    technologies: ['Maquette interactive', 'Pédagogie', 'Neurophysiologie', 'Électronique analogique', 'Conception modulaire'],
     links: []
   },
   {
@@ -191,24 +192,24 @@ export const projects: Project[] = [
     category: 'finance',
     status: 'deployed',
     isSensitive: true,
-    description: 'Application de gestion de patrimoine multi-comptes avec analyse IA automatisée, rééquilibrage algorithmique et architecture event-driven. Pipeline complet : ingestion transactions → event store (JSONL) → materialized views (CQRS) → market data enrichment → cascade IA multi-provider (Perplexity → Gemini → Mistral → OpenRouter) → rebalancing engine (règles tactiques + IA) → rapports automatiques.',
+    description: 'Application de gestion de patrimoine multi-comptes avec historisation d\'événements, vues de lecture (CQRS) et analyse assistée par IA. Pipeline : ingestion transactions → event store (JSONL) → vues matérialisées → enrichissement données de marché → analyse multi-provider → rapports.',
     problem: 'La gestion manuelle de portefeuille est chronophage et sujette aux biais. Les outils existants n\'offrent ni intelligence décisionnelle contextuelle, ni audit trail complet, ni automatisation des stratégies complexes.',
-    solution: 'Architecture Event Sourcing pour une auditabilité totale (SSOT JSONL) couplée à un moteur de décision hybride (Règles strictes + IA Générative). Utilisation du pattern CQRS pour la performance et d\'une cascade d\'IA pour optimiser le ratio coût/intelligence.',
+    solution: 'Architecture Event Sourcing pour une auditabilité forte (journal d\'événements en JSONL) couplée à un moteur de décision hybride (règles + IA). Utilisation du pattern CQRS pour la performance et d\'une orchestration multi-provider pour l\'analyse.',
     architecture: [
-      'Event Store (SSOT) : Transactions en JSONL immuable + Hashing SHA-256',
-      'CQRS : Séparation Write (API Flask) / Read (Vues matérialisées)',
-      'Cascade IA Multi-Provider : Perplexity (Macro) → Gemini (Tech) → Mistral (Synthèse)',
-      'Rebalancing Engine : Règles tactiques (VIX, Or, Taux) + surveillance IA',
-      'Frontend : Dashboard Jinja2 + Visualisation D3'
+      'Event Store : transactions JSONL immuables + hashing',
+      'CQRS : séparation Write / Read (vues matérialisées)',
+      'Analyse IA multi-provider : synthèse et aide à la décision (selon règles)',
+      'Moteur de règles : alertes, garde-fous, scénarios de rééquilibrage',
+      'Frontend : dashboard web'
     ],
     demonstrations: [
       'Backend : Architecture Event Sourcing & CQRS pure',
-      'IA : Orchestration complexe (Cascade, Fallback, Circuit Breaker)',
-      'Data Engineering : Pipeline de validation strict (Pydantic, SHA-256)',
+      'IA : Orchestration multi-provider (fallback, circuit breaker si besoin)',
+      'Data Engineering : validation stricte (Pydantic), traçabilité',
       'Finance : Modélisation multi-devises & Audit trail complet',
       'DevOps : Gestion de la persistance fichier (JSONL) vs Base de données'
     ],
-    technologies: ['Python', 'Flask', 'JSONL', 'CQRS', 'Pydantic', 'Jinja2', 'Perplexity', 'Gemini', 'Mistral'],
+    technologies: ['Finance', 'Event Sourcing', 'CQRS', 'Reporting', 'IA', 'Python'],
     links: []
   }
 ];
@@ -297,25 +298,25 @@ export const skills = [
     id: 'rf',
     label: 'RF / LoRaWAN',
     icon: 'Radio',
-    description: 'Maîtrise LoRaWAN end-to-end : OTAA/ABP, payload encoding/decoding, intégration TTN → MQTT. Gestion contraintes RF (portée, débit, énergie).'
+    description: 'Expérience LoRaWAN end-to-end : OTAA/ABP, payload encoding/decoding, intégration TTN → MQTT. Gestion des contraintes RF (portée, débit, énergie).'
   },
   {
     id: 'backend',
     label: 'Backend / API',
     icon: 'Server',
-    description: 'Architecture d\'APIs modernes (FastAPI) : REST + WebSocket temps réel, modèles de données (SQLModel), gestion de flux asynchrones. Pensé pour la scalabilité.'
+    description: 'Architecture d\'APIs (FastAPI) : REST + WebSocket temps réel, modèles de données (SQLModel), gestion de flux asynchrones. Pensé pour rester maintenable et extensible.'
   },
   {
     id: 'data',
     label: 'Data / IA',
     icon: 'BarChart3',
-    description: 'Pipelines de données bout-en-bout : collecte IoT → stockage → analyse. Intégration IA supervisée (YOLO pour vision, ML pour séries temporelles). Co-conception avec IA générative.'
+    description: 'Pipelines de données bout-en-bout : collecte IoT → stockage → analyse. Intégration IA supervisée (YOLO pour vision, ML pour séries temporelles). IA utilisée pour accélérer le prototypage.'
   },
   {
     id: 'ux',
     label: 'UX / Frontend',
     icon: 'Monitor',
-    description: 'Interfaces fonctionnelles et rapides (Svelte/SvelteKit). Focus sur la visualisation temps réel et l\'expérience utilisateur. Prototypage assisté par IA.'
+    description: 'Dashboards de monitoring et interfaces de projet : intégration, corrections et livraison d\'une UI maintenable, souvent avec copilote IA pour accélérer (Svelte/React selon le besoin).'
   }
 ];
 
@@ -335,7 +336,7 @@ export const highlights = [
     id: 'ai-component',
     title: 'Orchestration IA',
     subtitle: 'Conception vs Exécution',
-    description: 'Je sépare la syntaxe de la sémantique. Je définis l\'architecture, les algorithmes et les contraintes physiques. Je délègue la rédaction du code à l\'IA, agissant comme un directeur technique qui valide rigoureusement chaque brique.',
+    description: 'J\'utilise l\'IA comme copilote pour itérer vite (frontend, backend, docs). Je garde le contrôle sur l\'architecture, les choix techniques, les tests et la cohérence du système.',
     icon: 'Network'
   },
   {
@@ -355,7 +356,7 @@ export const personalInfo = {
   name: 'Mathis Steinmann',
   title: 'Étudiant L2 Sciences de la Vie',
   subtitle: 'Université Côte d\'Azur (Nice)',
-  tagline: 'Je ne suis pas développeur, je suis Architecte de Systèmes. Je conçois la logique et les contraintes (IoT, Bio, Data), et j\'orchestre l\'IA pour l\'exécution technique. Elle est mon accélérateur, pas mon cerveau.',
+  tagline: 'Je conçois des systèmes complets sous contraintes (IoT, données, vivant) et je les fais converger jusqu\'à une démo utilisable. J\'utilise l\'IA comme copilote pour accélérer l\'implémentation, tout en gardant la responsabilité de l\'intégration, du debug et de la validation.',
   location: 'Nice, France',
   email: 'mathis.steinmann@outlook.fr',
   github: 'github.com/CypreRask',
@@ -365,8 +366,8 @@ export const personalInfo = {
 
 export const heroStats = [
   { value: '5+', label: 'Projets' },
-  { value: 'IoT', label: 'Data / IA / Bio' },
-  { value: 'Nice', label: 'France' }
+  { value: 'IoT / IA / Bio', label: 'Domaines' },
+  { value: 'Nice, FR', label: 'Localisation' }
 ];
 
 // ============================================

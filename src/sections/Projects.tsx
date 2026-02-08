@@ -135,7 +135,7 @@ export const Projects: React.FC = () => {
                     {project.isSensitive && (
                       <p className="text-xs text-amber-500 mt-2 flex items-center gap-1">
                         <Lock className="w-3 h-3" />
-                        Données masquées — démo avec données synthétiques
+                        Projet privé — données masquées (démo synthétique à venir)
                       </p>
                     )}
                   </div>
@@ -159,7 +159,7 @@ export const Projects: React.FC = () => {
                     </div>
 
                     <button className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-                      Voir le case study
+                      Voir le projet
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
