@@ -30,6 +30,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   }, [isOpen]);
 
   if (!project) return null;
+  const isSensitive = Boolean(project.isSensitive);
 
   return createPortal(
     <AnimatePresence>
@@ -125,60 +126,92 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </GlassCard>
                 </div>
 
-                {/* Architecture */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Layers className="w-5 h-5 text-blue-500" />
-                    <h3 className="font-semibold text-lg">Architecture</h3>
-                  </div>
-                  <div className="space-y-2">
-                    {project.architecture.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-white/5 dark:bg-white/5"
-                      >
-                        <span className="w-6 h-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-medium">
-                          {index + 1}
-                        </span>
-                        <span className="text-sm">{item}</span>
+                {isSensitive ? (
+                  <section>
+                    <GlassCard className="p-5" hover={false}>
+                      <h3 className="font-semibold text-lg mb-2">Détails</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Ce projet manipule des données personnelles. Les détails techniques (architecture, métriques,
+                        règles, etc.) sont volontairement masqués.
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-3">
+                        Une démonstration sur données synthétiques pourra être publiée plus tard. En attendant, je peux
+                        en parler sur demande.
+                      </p>
+
+                      <div className="mt-4">
+                        <div className="text-sm font-medium mb-2">Tags</div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 dark:bg-white/5 text-foreground"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </section>
+                    </GlassCard>
+                  </section>
+                ) : (
+                  <>
+                    {/* Architecture */}
+                    <section>
+                      <div className="flex items-center gap-2 mb-4">
+                        <Layers className="w-5 h-5 text-blue-500" />
+                        <h3 className="font-semibold text-lg">Architecture</h3>
+                      </div>
+                      <div className="space-y-2">
+                        {project.architecture.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-3 p-3 rounded-lg bg-white/5 dark:bg-white/5"
+                          >
+                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-medium">
+                              {index + 1}
+                            </span>
+                            <span className="text-sm">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </section>
 
-                {/* Demonstrations - Ce que ça démontre */}
-                <section>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Wrench className="w-5 h-5 text-pink-500" />
-                    <h3 className="font-semibold text-lg">Ce que ça démontre</h3>
-                  </div>
-                  <ul className="grid sm:grid-cols-2 gap-3">
-                    {project.demonstrations.map((item, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start gap-2 text-sm"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+                    {/* Demonstrations - Ce que ça démontre */}
+                    <section>
+                      <div className="flex items-center gap-2 mb-4">
+                        <Wrench className="w-5 h-5 text-pink-500" />
+                        <h3 className="font-semibold text-lg">Ce que ça démontre</h3>
+                      </div>
+                      <ul className="grid sm:grid-cols-2 gap-3">
+                        {project.demonstrations.map((item, index) => (
+                          <li
+                            key={index}
+                            className="flex items-start gap-2 text-sm"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
 
-                {/* Technologies */}
-                <section>
-                  <h3 className="font-semibold text-lg mb-4">Technologies</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 dark:bg-white/5 text-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </section>
+                    {/* Technologies */}
+                    <section>
+                      <h3 className="font-semibold text-lg mb-4">Technologies</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, index) => (
+                          <span
+                            key={index}
+                            className="px-3 py-1.5 rounded-full text-sm font-medium bg-white/10 dark:bg-white/5 text-foreground"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </section>
+                  </>
+                )}
               </div>
 
               {/* Footer */}

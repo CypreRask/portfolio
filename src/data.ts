@@ -192,8 +192,8 @@ export const projects: Project[] = [
     category: 'finance',
     status: 'deployed',
     isSensitive: true,
-    description: 'Application de gestion de patrimoine multi-comptes avec historisation d\'événements, vues de lecture (CQRS) et analyse assistée par IA. Pipeline : ingestion transactions → event store (JSONL) → vues matérialisées → enrichissement données de marché → analyse multi-provider → rapports.',
-    problem: 'La gestion manuelle de portefeuille est chronophage et sujette aux biais. Les outils existants n\'offrent ni intelligence décisionnelle contextuelle, ni audit trail complet, ni automatisation des stratégies complexes.',
+    description: 'Application privée de suivi de portefeuille (multi-comptes) avec historisation d\'événements, vues de lecture (CQRS) et analyse assistée par IA. Objectif : un outil sur mesure, maîtrisé de bout en bout, qui reflète exactement mes règles et mes besoins.',
+    problem: 'Je voulais un système sur mesure et contrôlable : règles explicites, traçabilité complète des décisions, et automatisations adaptées à ma façon de suivre le portefeuille.',
     solution: 'Architecture Event Sourcing pour une auditabilité forte (journal d\'événements en JSONL) couplée à un moteur de décision hybride (règles + IA). Utilisation du pattern CQRS pour la performance et d\'une orchestration multi-provider pour l\'analyse.',
     architecture: [
       'Event Store : transactions JSONL immuables + hashing',
