@@ -753,8 +753,8 @@ export const timelineItems: TimelineItem[] = [
     },
     place: { fr: 'Berne & international', en: 'Bern & international' },
     detail: {
-      fr: 'Représentation des Suisses de France au CSE (mandat 2025-2029) et organisation d’événements pour le Parlement des Jeunes Suisses de l’Étranger.',
-      en: 'Representing Swiss residents in France at the CSA (2025-2029 term) and coordinating events on the Youth Parliament of the Swiss Abroad board.',
+      fr: 'Représentation des Suisses de France au CSE (mandat 2025-2029), comité événements du Youth Parliament of the Swiss Abroad (YPSA) et réalisation du site ypsa.ch.',
+      en: 'Representing Swiss residents in France at the CSA (2025-2029 term), Events Committee member of the Youth Parliament of the Swiss Abroad (YPSA), and creator of ypsa.ch.',
     },
   },
   {
