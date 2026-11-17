@@ -88,7 +88,7 @@ export const copy = {
     },
     hero: {
       badge: 'L3 Bio-informatique · Université Côte d’Azur',
-      option: 'Nice, France · Candidatures Master 2027',
+      option: 'Nice, France',
       name: 'Mathis Steinmann',
       lead: 'Je construis des projets entre biologie, capteurs sur le terrain, vision artificielle et applications web. J’aime partir d’une question scientifique ou pratique pour aboutir à un outil ou un objet que l’on peut manipuler.',
       ctaProjects: 'Découvrir les projets',
@@ -99,7 +99,7 @@ export const copy = {
     },
     projects: {
       title: 'Projets principaux',
-      intro: 'Trois réalisations majeures à explorer directement ou à lire en détail.',
+      intro: 'Applications web, capteurs de terrain et vision par ordinateur.',
       readStory: 'Lire l’étude de cas',
       secondaryTitle: 'Autres réalisations',
       secondaryIntro: 'Prototypes, outils personnels et projets collectifs menés en parallèle.',
@@ -133,19 +133,17 @@ export const copy = {
     },
     skills: {
       title: 'Ce que je sais concevoir',
-      intro: 'Des compétences acquises sur le terrain, en laboratoire et sur des applications mises en ligne.',
-      aiTitle: 'Place de l’IA dans mon travail',
-      aiBody: 'J’utilise des assistants de code et des agents pour écrire plus vite les interfaces, les tests et la documentation. Je garde la main sur les choix d’architecture, les contraintes physiques ou biologiques, la relecture et la validation finale.',
+      intro: 'De la biologie expérimentale aux systèmes autonomes et aux applications web.',
     },
     background: {
       title: 'Parcours',
       intro: 'Formation en cours à Nice, recherche appliquée, mission universitaire et engagements.',
     },
     contact: {
-      title: 'Échanger autour d’un projet ou d’un master',
-      intro: 'Disponible pour discuter de mes candidatures en master pour la rentrée 2027, d’un projet scientifique ou d’une collaboration.',
+      title: 'Contact',
+      intro: 'Pour échanger autour d’un projet scientifique, d’une collaboration ou d’un stage.',
       location: 'Nice, France',
-      footer: 'Portfolio bilingue FR / EN · Données et limites présentées sans suivi publicitaire.',
+      footer: 'Nice, France',
     },
   },
   en: {
@@ -159,7 +157,7 @@ export const copy = {
     },
     hero: {
       badge: 'BSc Bioinformatics (Year 3) · Université Côte d’Azur',
-      option: 'Nice, France · 2027 Master applicant',
+      option: 'Nice, France',
       name: 'Mathis Steinmann',
       lead: 'I build projects across biology, field sensors, computer vision, and web applications. I enjoy taking a scientific or practical question all the way to a working tool or physical object people can try.',
       ctaProjects: 'Explore projects',
@@ -170,7 +168,7 @@ export const copy = {
     },
     projects: {
       title: 'Featured projects',
-      intro: 'Three main projects with live demos, real hardware photos, and full stories inside.',
+      intro: 'Web applications, field instrumentation, and computer vision.',
       readStory: 'Read case study',
       secondaryTitle: 'Other work',
       secondaryIntro: 'Personal tools, group projects, and ongoing prototypes.',
@@ -204,19 +202,17 @@ export const copy = {
     },
     skills: {
       title: 'What I build',
-      intro: 'Skills developed through field deployments, lab work, and live web applications.',
-      aiTitle: 'How I use AI tools',
-      aiBody: 'I rely on AI coding assistants to speed up UI implementation, test suites, and documentation, while keeping ownership of system design, physical or biological constraints, code review, and final verification.',
+      intro: 'From experimental biology to autonomous hardware and live web applications.',
     },
     background: {
       title: 'Background',
       intro: 'Undergraduate studies in Nice, research internship and collaboration, campus work, and civic roles.',
     },
     contact: {
-      title: 'Get in touch',
-      intro: 'Happy to discuss 2027 Master applications, research collaborations, or scientific projects.',
+      title: 'Contact',
+      intro: 'Available to discuss scientific projects, collaborations, or internships.',
       location: 'Nice, France',
-      footer: 'Bilingual FR / EN portfolio · No tracking cookies or analytics.',
+      footer: 'Nice, France',
     },
   },
 } as const;
@@ -310,14 +306,14 @@ export const mainProjects: MainProjectCase[] = [
         en: 'A full web application that ingests lecture files, builds source-anchored sheets and quizzes, schedules reviews, draws a concept map, and offers an open 3-board walkthrough.',
       },
       workingAndLimits: {
-        fr: 'La plateforme est en ligne et utilisable au quotidien. Le code reste privé. Les liens affichés aujourd’hui sur la carte des notions restent des rapprochements automatiques plutôt que des prérequis validés par un enseignant, et une nouvelle vue « Galaxie » est encore en phase de mise au point.',
-        en: 'The app runs live in production while its source code remains private. Concept map edges currently reflect automatic co-occurrence rather than instructor-certified prerequisites, and a newer Galaxy view is still being finalized.',
+        fr: 'La plateforme est en ligne et utilisable au quotidien, tandis que le code source reste privé. Les liens de la carte des notions reposent encore sur la proximité statistique dans le cours plutôt que sur une validation par un enseignant.',
+        en: 'The app runs live in production while its source code remains private. Concept map edges currently reflect statistical co-occurrence in lecture notes rather than instructor-certified prerequisites.',
       },
     },
     technical: {
       optionsAndChoices: {
-        fr: 'Au départ, des modèles généraient librement le code HTML/JS de petits laboratoires scientifiques. Un audit de 42 laboratoires générés a montré 17 cas faux ou partiels (erreurs d’unités d’un facteur 1 000, courbes de diffraction plates ou bilans de masse non conservés). La génération libre a donc été bloquée au profit de noyaux de calcul écrits et vérifiés à la main, que le modèle sélectionne et paramètre.',
-        en: 'Early experiments let LLMs freely write HTML/JS code for interactive science labs. Auditing 42 generated labs uncovered 17 incorrect or partial outputs (1000x unit errors, flat diffraction curves, broken mass conservation). Free-form lab coding was disabled in favor of verified deterministic calculation kernels parameterized by the model.',
+        fr: 'Les modèles de langage restent fiables pour structurer un cours et extraire des notions, mais la génération libre de code scientifique introduit des erreurs d’unités ou de physique difficiles à détecter. Les laboratoires interactifs s’appuient donc sur des noyaux de calcul déterministes vérifiés, que des modèles cloud ou locaux (Gemma et Qwen via llama.cpp) sélectionnent et paramètrent en sortie structurée.',
+        en: 'Language models handle lecture structuring well, whereas unconstrained generation of scientific simulation code introduces subtle unit or physics bugs. Interactive labs therefore run on verified deterministic calculation kernels that cloud APIs or local models (Gemma and Qwen via llama.cpp) select and parameterize through structured schemas.',
       },
       architecture: [
         {
@@ -338,12 +334,12 @@ export const mainProjects: MainProjectCase[] = [
         },
       ],
       testsAndMeasures: {
-        fr: 'Plus de 4 500 tests backend automatisés, campagnes de recette en navigateur réel sur serveur de staging, et audit scientifique détaillé sur 42 prototypes de laboratoires et sur les modèles locaux Gemma / Qwen.',
-        en: 'Over 4,500 automated backend tests, real-browser staging checks, and dedicated scientific/benchmark audits across 42 lab prototypes and local Gemma / Qwen models.',
+        fr: 'Validation continue par suite de tests backend, contrôles en navigateur réel sur les parcours clés et vérification scientifique des laboratoires guidés avec modèles cloud et modèles locaux.',
+        en: 'Continuous validation through automated backend test suites, real-browser checks on key flows, and scientific verification of guided labs across both cloud and local models.',
       },
       difficultiesAndLimits: {
-        fr: 'Gestion des plafonds de jetons provoquant des JSON tronqués, modèles locaux dépensant tout leur budget en réflexion interne sans sortie exploitable, et nettoyage de doublons ou de balises LaTeX brutes dans la carte des notions.',
-        en: 'Handling token-limit truncation on JSON outputs, local reasoning models burning their token budget with empty answers, and cleaning duplicate or raw-LaTeX nodes in the concept graph.',
+        fr: 'Normalisation des formules mathématiques (LaTeX), fusion des notions proches dans la carte et cadrage strict des schémas JSON sur les longs documents.',
+        en: 'Normalizing LaTeX math formatting, merging duplicate concepts in the graph, and enforcing strict JSON schemas on long documents.',
       },
       stack: ['Python', 'FastAPI', 'PostgreSQL', 'pgvector', 'SvelteKit', 'FSRS', 'Docker', 'llama.cpp'],
     },
@@ -428,8 +424,8 @@ export const mainProjects: MainProjectCase[] = [
         en: 'A two-sided weather-resistant sensor box powered by battery and solar panel, automated telemetry ingestion, and humuscope.noepora.fr featuring five educational activities and two reading levels.',
       },
       workingAndLimits: {
-        fr: 'Sur les 42 relevés pris en conditions réelles, quatre capteurs distincts ont montré ensemble l’assèchement progressif du compost. En revanche, la confrontation des données a révélé que la sonde thermique mesurait l’air du boîtier plutôt que le cœur de la matière : le site s’interdit donc d’annoncer une « chaleur du compost » tant que la sonde n’est pas enfoncée dedans.',
-        en: 'Across 42 field readings, four independent channels consistently tracked gradual drying. Data review also showed that the thermal probe measured air inside the enclosure rather than the compost core, so the public site intentionally avoids claiming core compost heat until the probe is repositioned.',
+        fr: 'Les relevés terrain ont confirmé le suivi cohérent de l’assèchement sur plusieurs capteurs indépendants. L’analyse croisée des courbes a aussi montré que la sonde thermique mesurait l’air du boîtier plutôt que le cœur du compost : le site s’interdit donc d’annoncer une « chaleur du compost » tant que la sonde n’est pas enfoncée dedans.',
+        en: 'Field telemetry tracked gradual drying consistently across multiple independent sensor channels. Cross-checking the curves also showed that the thermal probe measured air inside the enclosure rather than the compost core, so the public site avoids claiming core compost heat until the probe is repositioned.',
       },
     },
     technical: {
@@ -452,12 +448,12 @@ export const mainProjects: MainProjectCase[] = [
         },
       ],
       testsAndMeasures: {
-        fr: '1 741 trames de banc d’établi séparées explicitement des 42 relevés terrain valides (juillet-août 2026) : humidité sol de 100 % à 21 %, conductivité de 2 731 à 108, CO2 de 687 à 490 ppm. Audit du site public : 182 tests JS et 25 tests Python passés.',
-        en: '1,741 bench-test frames separated from 42 valid field frames (July-Aug 2026): soil moisture dropped 100% to 21%, conductivity 2,731 to 108, CO2 687 to 490 ppm. Public app validated with 182 JS tests and 25 Python tests.',
+        fr: 'Séparation explicite des trames de banc d’établi et des mesures terrain (juillet-août 2026) pour vérifier les tendances d’humidité, de conductivité et de CO2, complétée par des tests automatisés sur l’application web.',
+        en: 'Strict separation between bench-test frames and valid field telemetry (July-Aug 2026) to validate moisture, conductivity, and CO2 trends, alongside automated frontend and backend tests.',
       },
       difficultiesAndLimits: {
-        fr: 'Écart constant de −1,50 °C (−1,78 à −1,36 °C) entre la sonde compost et la sonde d’air sur tout le mois d’observation, confirmé par le jumeau thermique (prévision 20,0–24,2 °C contre 28,9 °C mesurés). Les capteurs MOS restent sensibles à l’humidité, le C/N total n’est pas mesuré, et le dépôt de la plateforme reste privé.',
-        en: 'Constant -1.50 °C offset (-1.78 to -1.36 °C) between compost and air probes throughout the field run, confirmed when a thermal twin forecast 20.0-24.2 °C against 28.9 °C measured. MOS sensors remain humidity-dependent, C/N ratio is not directly measured, and the platform repo remains private.',
+        fr: 'Décalage thermique systématique tant que la sonde reste dans le boîtier plutôt qu’au cœur du tas, sensibilité des capteurs gaz MOS à l’humidité, absence de mesure directe du rapport C/N et dépôt logiciel maintenu privé.',
+        en: 'Systematic thermal offset while the probe sits in the enclosure rather than the compost core, humidity sensitivity of MOS gas sensors, no direct C/N measurement, and private platform repository.',
       },
       stack: ['ESP32', 'Heltec LoRa 32 V3', 'LoRaWAN', 'TTN / MQTT', 'SCD41', 'RS485', 'FastAPI', 'SQLite', 'Svelte'],
     },
@@ -549,12 +545,12 @@ export const mainProjects: MainProjectCase[] = [
         },
       ],
       testsAndMeasures: {
-        fr: 'Sur SmartHive : entraînement sur jeu public Bee-Hornet-Detect et export NCNN/TFLite INT8 en conditions de laboratoire. À l’Inria : protocoles multi-graines et comparaisons contrôlées (apprentissage actif vs aléatoire, généralisation inter-sites).',
-        en: 'On SmartHive: training on public Bee-Hornet-Detect data and NCNN/TFLite INT8 lab export. At Inria: multi-seed controlled comparisons (active learning vs random baselines, cross-site generalization).',
+        fr: 'Sur SmartHive : entraînement sur jeu public Bee-Hornet-Detect et export en modèles quantifiés (NCNN/TFLite INT8) sur Raspberry Pi. À l’Inria : protocoles multi-graines et comparaisons contrôlées (apprentissage actif vs échantillonnage aléatoire, généralisation inter-sites).',
+        en: 'On SmartHive: training on public Bee-Hornet-Detect data and quantized NCNN/TFLite INT8 deployment on Raspberry Pi. At Inria: multi-seed controlled comparisons (active learning vs random baselines, cross-site generalization).',
       },
       difficultiesAndLimits: {
-        fr: 'Consommation énergétique trop élevée sur Raspberry Pi en continu ; divergence entre deux copies locales de SmartHive (FabLab et JPO) ; et côté recherche, plusieurs stratégies testées qui n’ont pas surpassé les références simples sous protocole strict.',
-        en: 'High continuous power draw on Raspberry Pi, divergence between two local SmartHive branches (FabLab vs open-day demo), and several research hypotheses that did not beat simple baselines under controlled evaluation.',
+        fr: 'Autonomie énergétique exigeante pour de la vidéo continue sur batterie, variations importantes de lumière en extérieur et confidentialité des données et résultats internes à l’Inria.',
+        en: 'Battery power budget for continuous edge video, outdoor lighting variability, and confidentiality of Inria datasets and internal findings.',
       },
       stack: ['Python', 'PyTorch', 'YOLO / NCNN', 'OpenCV', 'FastAPI', 'SvelteKit', 'LoRaWAN'],
     },
@@ -624,7 +620,7 @@ export const secondaryWorks: SecondaryWork[] = [
     },
     summary: {
       fr: 'D’un côté, une maquette physique modulaire avec dendrites aimantées et LEDs pour montrer comment des signaux s’additionnent sur un neurone. De l’autre, NeuroLab : sept petits laboratoires interactifs utilisables sans connexion pour réviser la neurophysiologie.',
-      en: 'A modular physical neuron model with magnetic dendrites and LED membrane visualization, paired with NeuroLab: seven offline interactive neurophysiology labs and 445 checked review questions.',
+      en: 'A modular physical neuron model with magnetic dendrites and LED membrane visualization, paired with NeuroLab: seven offline interactive neurophysiology labs.',
     },
     role: { fr: 'Prototype personnel / FabLab', en: 'Personal / FabLab prototype' },
     image: {
@@ -702,8 +698,8 @@ export const timelineItems: TimelineItem[] = [
     },
     place: { fr: 'Université Côte d’Azur · Nice', en: 'Université Côte d’Azur · Nice' },
     detail: {
-      fr: 'Formation en biologie, biostatistiques et informatique. Préparation des candidatures en master pour la rentrée 2027.',
-      en: 'Studies across biology, biostatistics, and computer science. Preparing Master applications for 2027.',
+      fr: 'Biologie, biostatistiques, génomique et informatique appliquée.',
+      en: 'Biology, biostatistics, genomics, and applied computer science.',
     },
   },
   {

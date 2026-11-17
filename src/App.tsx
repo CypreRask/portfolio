@@ -544,7 +544,7 @@ export function App() {
                 <p className="text-muted-foreground">{t.skills.intro}</p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {skillPillars.map((pillar, i) => {
                   const Icon = pillarIcons[pillar.icon];
                   return (
@@ -564,11 +564,6 @@ export function App() {
                   );
                 })}
               </div>
-
-              <GlassCard className="p-5 sm:p-6 max-w-4xl" hover={false}>
-                <h3 className="text-base font-semibold mb-1.5">{t.skills.aiTitle}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{t.skills.aiBody}</p>
-              </GlassCard>
             </section>
 
             {/* Background */}
