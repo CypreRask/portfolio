@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirection | Mathis Steinmann</title>
+  <meta name="robots" content="noindex" />
+  <script>
+    (function () {
+      var base = "/portfolio/";
+      var path = window.location.pathname;
+      if (path.indexOf(base) === 0) {
+        var rest = path.slice(base.length).replace(/^\/+|\/+$/g, "");
+        if (rest.indexOf("case/") === 0) {
+          var slug = rest.slice(5).split("/")[0];
+          window.location.replace(base + "?case=" + encodeURIComponent(slug) + window.location.search.replace(/^\?/, "&"));
+          return;
+        }
+      }
+      window.location.replace(base);
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirection vers <a href="/portfolio/">le portfolio</a>…</p>
+</body>
+</html>

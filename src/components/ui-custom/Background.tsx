@@ -174,7 +174,7 @@ export const NetworkBackground: React.FC<{ nodes?: NetworkNode[] }> = ({
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
               scale: [1, 1.2, 1],
-              opacity: [0.4, 0.7, 0.4]
+              opacity: [0.16, 0.32, 0.16]
             }}
             transition={{
               scale: { duration: 3, repeat: Infinity, delay: i * 0.5 },

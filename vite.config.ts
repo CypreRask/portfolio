@@ -1,14 +1,12 @@
-import path from "path"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
-import { inspectAttr } from 'kimi-plugin-inspect-react'
+import path from "path";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
-// https://vite.dev/config/
 export default defineConfig({
   base: "/portfolio/",
-  plugins: [inspectAttr(), react()],
+  plugins: [react()],
   server: {
-    port: 5190,
+    port: 5193,
     strictPort: true,
     host: true,
   },
