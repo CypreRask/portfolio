@@ -88,7 +88,7 @@ export const copy = {
     },
     hero: {
       badge: 'L3 Bio-informatique · Université Côte d’Azur',
-      option: 'Option neurosciences intégratives · Candidatures Master 2027',
+      option: 'Nice, France · Candidatures Master 2027',
       name: 'Mathis Steinmann',
       lead: 'Je construis des projets entre biologie, capteurs sur le terrain, vision artificielle et applications web. J’aime partir d’une question scientifique ou pratique pour aboutir à un outil ou un objet que l’on peut manipuler.',
       ctaProjects: 'Découvrir les projets',
@@ -159,7 +159,7 @@ export const copy = {
     },
     hero: {
       badge: 'BSc Bioinformatics (Year 3) · Université Côte d’Azur',
-      option: 'Integrative neuroscience elective · 2027 Master applicant',
+      option: 'Nice, France · 2027 Master applicant',
       name: 'Mathis Steinmann',
       lead: 'I build projects across biology, field sensors, computer vision, and web applications. I enjoy taking a scientific or practical question all the way to a working tool or physical object people can try.',
       ctaProjects: 'Explore projects',
@@ -235,7 +235,7 @@ export const mainProjects: MainProjectCase[] = [
     tag: { fr: 'Application web', en: 'Web platform' },
     statusLabel: { fr: 'En ligne · Démo ouverte', en: 'Live · Open demo' },
     glow: 'chlorophyll',
-    title: { fr: 'Noépora Learn', en: 'Noépora Learn' },
+    title: { fr: 'Noépora', en: 'Noépora' },
     subtitle: {
       fr: 'Des cours universitaires transformés en fiches reliées aux sources, en questions et en carte des notions',
       en: 'Turning university lectures into source-linked study sheets, quizzes, and a concept map',
@@ -249,8 +249,8 @@ export const mainProjects: MainProjectCase[] = [
       width: 1280,
       height: 800,
       alt: {
-        fr: 'Page publique de Noépora Learn montrant une question interactive de neurophysiologie',
-        en: 'Noépora Learn public demo page displaying an interactive neurophysiology question',
+        fr: 'Page publique de Noépora montrant une question interactive de neurophysiologie',
+        en: 'Noépora public demo page displaying an interactive neurophysiology question',
       },
       caption: {
         fr: 'Aperçu en ligne de la démonstration publique sur learn.noepora.fr/decouvrir.',
@@ -276,8 +276,8 @@ export const mainProjects: MainProjectCase[] = [
         width: 960,
         height: 975,
         alt: {
-          fr: 'Questions de révision et carte interactive des notions dans Noépora Learn',
-          en: 'Revision quiz and interactive concept map in Noépora Learn',
+          fr: 'Questions de révision et carte interactive des notions dans Noépora',
+          en: 'Revision quiz and interactive concept map in Noépora',
         },
         caption: {
           fr: 'Planche II : quiz relié aux notions et carte d’ensemble pour repérer les manques.',
@@ -298,8 +298,8 @@ export const mainProjects: MainProjectCase[] = [
         en: 'Classic flashcard tools require tedious manual entry and isolate facts from lecture flow. Asking an AI directly for study sheets or interactive labs often produces off-syllabus claims and subtle calculation errors.',
       },
       context: {
-        fr: 'Projet personnel démarré en licence pour mes propres révisions en biologie et physique, devenu une application web complète (anciennement SmartRecall) avec une démonstration ouverte sans création de compte.',
-        en: 'Personal project started during my undergraduate studies for biology and physics revision, grown into a deployed web platform (formerly SmartRecall) with an account-free public demo.',
+        fr: 'Projet personnel démarré en licence pour mes propres révisions en biologie et physique, devenu une application web complète (anciennement SmartRecall) avec une démonstration ouverte sans création de compte. Le nom « Noépora » est un mot composé à partir du grec (noûs / noêsis pour l’esprit qui comprend et poros pour le passage ou le chemin, en opposition à l’aporie).',
+        en: 'Personal project started during my undergraduate studies for biology and physics revision, grown into a deployed web platform (formerly SmartRecall) with an account-free public demo. The name Noépora is coined from Greek roots (nous / noesis for mind and understanding, and poros for a path or passage, in contrast to aporia).',
       },
       role: {
         fr: 'Conception de l’application, choix de la méthode pédagogique, mise en place des contrôles de fiabilité sur les modèles et déploiement en ligne.',
@@ -702,8 +702,8 @@ export const timelineItems: TimelineItem[] = [
     },
     place: { fr: 'Université Côte d’Azur · Nice', en: 'Université Côte d’Azur · Nice' },
     detail: {
-      fr: 'Formation en biologie, biostatistiques et informatique, avec des enseignements optionnels en neurosciences intégratives. Préparation des candidatures en master pour la rentrée 2027.',
-      en: 'Studies across biology, biostatistics, and computer science, with an elective track in integrative neuroscience. Preparing Master applications for 2027.',
+      fr: 'Formation en biologie, biostatistiques et informatique. Préparation des candidatures en master pour la rentrée 2027.',
+      en: 'Studies across biology, biostatistics, and computer science. Preparing Master applications for 2027.',
     },
   },
   {
