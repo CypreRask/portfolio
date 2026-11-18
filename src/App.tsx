@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
+  ChevronDown,
   Compass,
   Cpu,
   Code,
@@ -11,6 +12,7 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  Maximize2,
   Menu,
   Moon,
   Sparkles,
@@ -26,6 +28,7 @@ import {
   timelineItems,
   type CaseSlug,
   type SecondaryWork,
+  type VisualAsset,
 } from '@/data/vitrineData';
 import { usePortfolioState } from '@/hooks/usePortfolioState';
 import { BackgroundGrid, NetworkBackground } from '@/components/ui-custom/Background';
@@ -45,9 +48,20 @@ const pillarIcons = {
 export function App() {
   const { lang, setLang, activeCase, openCase, closeCase, theme, toggleTheme } =
     usePortfolioState();
-  const [showcaseSlug, setShowcaseSlug] = useState<CaseSlug>('humuscope');
+  const [showcaseSlug, setShowcaseSlug] = useState<CaseSlug>('noepora');
   const [domainFilter, setDomainFilter] = useState<FilterDomain>('all');
+  const [expandedSecondary, setExpandedSecondary] = useState<Record<string, boolean>>({});
+  const [secondaryLightbox, setSecondaryLightbox] = useState<VisualAsset | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (!secondaryLightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSecondaryLightbox(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [secondaryLightbox]);
 
   const t = copy[lang];
   const activeProject = activeCase
@@ -267,7 +281,7 @@ export function App() {
                         e.preventDefault();
                         scrollTo('#projects');
                       }}
-                      className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition-opacity"
+                      className="btn-shine inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition-opacity"
                     >
                       {t.hero.ctaProjects}
                       <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -293,10 +307,39 @@ export function App() {
                       {t.hero.ctaLinkedin}
                     </a>
                   </div>
+
+                  <div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/50 max-w-md">
+                    <div>
+                      <div className="text-sm sm:text-base font-bold text-foreground">Bio-info · L3</div>
+                      <div className="text-xs text-muted-foreground">
+                        {lang === 'fr' ? 'Université Côte d’Azur' : 'Université Côte d’Azur'}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm sm:text-base font-bold text-foreground">Inria · STARS</div>
+                      <div className="text-xs text-muted-foreground">
+                        {lang === 'fr' ? 'Vision par ordinateur' : 'Computer vision'}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-sm sm:text-base font-bold text-foreground">Web & IoT</div>
+                      <div className="text-xs text-muted-foreground">
+                        {lang === 'fr' ? 'Démos & capteurs' : 'Live apps & sensors'}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Visual Glass Showcase */}
-                <div className="lg:col-span-6">
+                {/* Visual Glass Showcase with subtle orbital aura */}
+                <div className="lg:col-span-6 relative">
+                  <div
+                    aria-hidden="true"
+                    className="hidden lg:block absolute -inset-8 pointer-events-none"
+                  >
+                    <div className="w-full h-full rounded-full border border-dashed border-primary/20 animate-orbit-slow" />
+                    <div className="absolute inset-6 rounded-full border border-dashed border-amber-500/20 animate-orbit-reverse" />
+                  </div>
+
                   <GlassCard
                     className="p-3 sm:p-4"
                     glow={showcaseProject.glow}
@@ -328,21 +371,26 @@ export function App() {
                               ? 'Noépora'
                               : p.slug === 'humuscope'
                               ? 'Humuscope'
-                              : 'SmartHive / Inria'}
+                              : 'Abeilles / Inria'}
                           </button>
                         ))}
                       </div>
                     </div>
 
-                    <div className="rounded-xl overflow-hidden border border-border bg-black/15">
+                    <button
+                      type="button"
+                      onClick={() => openCase(showcaseProject.slug)}
+                      aria-label={`${t.hero.openProject} : ${showcaseProject.title[lang]}`}
+                      className="group relative block w-full rounded-xl overflow-hidden border border-border bg-black/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
                       <img
                         src={showcaseProject.cover.src}
                         width={showcaseProject.cover.width}
                         height={showcaseProject.cover.height}
                         alt={showcaseProject.cover.alt[lang]}
-                        className="w-full h-56 sm:h-72 object-cover"
+                        className="w-full h-56 sm:h-72 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       />
-                    </div>
+                    </button>
 
                     <div className="pt-3.5 px-1 flex flex-wrap items-center justify-between gap-3">
                       <div className="min-w-0 flex-1">
@@ -354,14 +402,31 @@ export function App() {
                         </p>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => openCase(showcaseProject.slug)}
-                        className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-lg bg-primary/15 text-primary text-xs font-semibold hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
-                      >
-                        {t.hero.openProject}
-                        <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        {showcaseProject.links[0] && (
+                          <a
+                            href={showcaseProject.links[0].url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 min-h-[40px] px-3 py-1.5 rounded-lg border border-border text-xs font-medium hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                          >
+                            {showcaseProject.links[0].kind === 'github' ? (
+                              <Github className="w-3.5 h-3.5" aria-hidden="true" />
+                            ) : (
+                              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                            )}
+                            <span className="hidden sm:inline">{showcaseProject.links[0].label[lang]}</span>
+                          </a>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => openCase(showcaseProject.slug)}
+                          className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-lg bg-primary/15 text-primary text-xs font-semibold hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                        >
+                          {t.hero.openProject}
+                          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                        </button>
+                      </div>
                     </div>
                   </GlassCard>
                 </div>
@@ -383,16 +448,25 @@ export function App() {
                     className="flex flex-col justify-between h-full"
                   >
                     <div>
-                      <div className="overflow-hidden border-b border-border bg-black/10">
+                      <button
+                        type="button"
+                        onClick={() => openCase(project.slug)}
+                        aria-label={`${t.projects.readStory} : ${project.title[lang]}`}
+                        className="group relative block w-full overflow-hidden border-b border-border bg-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
                         <img
                           src={project.cover.src}
                           width={project.cover.width}
                           height={project.cover.height}
                           loading="lazy"
                           alt={project.cover.alt[lang]}
-                          className="w-full h-52 object-cover"
+                          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         />
-                      </div>
+                        <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/70 text-white text-[11px] font-medium opacity-85 group-hover:opacity-100 transition-opacity">
+                          {t.projects.readStory}
+                          <ArrowRight className="w-3 h-3" aria-hidden="true" />
+                        </span>
+                      </button>
 
                       <div className="p-5 sm:p-6 space-y-3">
                         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -495,46 +569,157 @@ export function App() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {filteredSecondary.map((work) => (
-                  <GlassCard key={work.id} className="p-5 sm:p-6 flex flex-col justify-between gap-4">
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400">
-                          {work.statusLabel[lang]}
-                        </span>
-                        <span className="text-xs text-muted-foreground">{work.role[lang]}</span>
-                      </div>
+                {filteredSecondary.map((work) => {
+                  const isExpanded = !!expandedSecondary[work.id];
+                  return (
+                    <GlassCard key={work.id} className="p-5 sm:p-6 flex flex-col justify-between gap-4">
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400">
+                            {work.statusLabel[lang]}
+                          </span>
+                          <span className="text-xs text-muted-foreground">{work.role[lang]}</span>
+                        </div>
 
-                      <div>
-                        <h3 className="text-xl font-bold">{work.title[lang]}</h3>
-                        <p className="text-sm text-primary font-medium mt-0.5">
-                          {work.subtitle[lang]}
+                        <div>
+                          <h3 className="text-xl font-bold">{work.title[lang]}</h3>
+                          <p className="text-sm text-primary font-medium mt-0.5">
+                            {work.subtitle[lang]}
+                          </p>
+                        </div>
+
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {work.summary[lang]}
                         </p>
+
+                        {work.image && (
+                          <figure className="rounded-xl overflow-hidden border border-border">
+                            <button
+                              type="button"
+                              onClick={() => setSecondaryLightbox(work.image!)}
+                              aria-label={`${lang === 'fr' ? 'Agrandir' : 'Enlarge'}: ${work.image.alt[lang]}`}
+                              className="group relative block w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            >
+                              <img
+                                src={work.image.src}
+                                width={work.image.width}
+                                height={work.image.height}
+                                loading="lazy"
+                                alt={work.image.alt[lang]}
+                                className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                              />
+                              <span className="absolute bottom-2.5 right-2.5 inline-flex items-center justify-center w-7 h-7 rounded-lg bg-black/65 text-white opacity-80 group-hover:opacity-100 transition-opacity">
+                                <Maximize2 className="w-3.5 h-3.5" aria-hidden="true" />
+                              </span>
+                            </button>
+                            <figcaption className="px-3 py-2 text-xs text-muted-foreground bg-muted/40">
+                              {work.image.caption[lang]}
+                            </figcaption>
+                          </figure>
+                        )}
+
+                        {isExpanded && work.highlights && work.highlights.length > 0 && (
+                          <ul className="space-y-1.5 pt-2 border-t border-border/60 text-xs sm:text-sm text-muted-foreground">
+                            {work.highlights.map((h) => (
+                              <li key={h.fr} className="flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span>{h[lang]}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
 
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {work.summary[lang]}
-                      </p>
+                      <div className="pt-2 flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex flex-wrap gap-1.5">
+                          {work.stack?.map((tag) => (
+                            <span
+                              key={tag}
+                              className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-muted text-muted-foreground"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
 
-                      {work.image && (
-                        <figure className="rounded-xl overflow-hidden border border-border">
-                          <img
-                            src={work.image.src}
-                            width={work.image.width}
-                            height={work.image.height}
-                            loading="lazy"
-                            alt={work.image.alt[lang]}
-                            className="w-full h-44 object-cover"
-                          />
-                          <figcaption className="px-3 py-2 text-xs text-muted-foreground bg-muted/40">
-                            {work.image.caption[lang]}
-                          </figcaption>
-                        </figure>
-                      )}
-                    </div>
-                  </GlassCard>
-                ))}
+                        <div className="flex flex-wrap items-center gap-2">
+                          {work.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 min-h-[36px] px-3 py-1 rounded-lg border border-border text-xs font-medium hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                              {link.label[lang]}
+                            </a>
+                          ))}
+                          {work.highlights && work.highlights.length > 0 && (
+                            <button
+                              type="button"
+                              aria-expanded={isExpanded}
+                              onClick={() =>
+                                setExpandedSecondary((prev) => ({
+                                  ...prev,
+                                  [work.id]: !prev[work.id],
+                                }))
+                              }
+                              className="inline-flex items-center gap-1 min-h-[36px] px-3 py-1 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                            >
+                              {isExpanded
+                                ? lang === 'fr'
+                                  ? 'Réduire'
+                                  : 'Hide details'
+                                : lang === 'fr'
+                                ? 'Détails'
+                                : 'Details'}
+                              <ChevronDown
+                                className={`w-3.5 h-3.5 transition-transform ${
+                                  isExpanded ? 'rotate-180' : ''
+                                }`}
+                                aria-hidden="true"
+                              />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </GlassCard>
+                  );
+                })}
               </div>
+
+              {secondaryLightbox && (
+                <div
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={secondaryLightbox.alt[lang]}
+                  onClick={() => setSecondaryLightbox(null)}
+                  className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+                >
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="relative max-w-4xl w-full rounded-2xl overflow-hidden bg-[#0e1319] border border-white/15 shadow-2xl"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setSecondaryLightbox(null)}
+                      aria-label={lang === 'fr' ? 'Fermer l’aperçu' : 'Close preview'}
+                      className="absolute top-3 right-3 z-10 min-w-[44px] min-h-[44px] rounded-xl bg-black/70 text-white flex items-center justify-center hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
+                      <X className="w-5 h-5" aria-hidden="true" />
+                    </button>
+                    <img
+                      src={secondaryLightbox.src}
+                      alt={secondaryLightbox.alt[lang]}
+                      className="w-full max-h-[78vh] object-contain bg-black/40"
+                    />
+                    <p className="px-4 py-3 text-xs sm:text-sm text-zinc-300 border-t border-white/10">
+                      {secondaryLightbox.caption[lang]}
+                    </p>
+                  </div>
+                </div>
+              )}
             </section>
 
             {/* Skills & AI approach */}

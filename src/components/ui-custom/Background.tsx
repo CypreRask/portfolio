@@ -38,8 +38,8 @@ export const BackgroundGrid: React.FC = () => {
       </svg>
       
       {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-[12%] left-[14%] w-[28rem] h-[28rem] bg-emerald-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-[14%] right-[12%] w-[28rem] h-[28rem] bg-amber-500/10 rounded-full blur-3xl" />
     </div>
   );
 };
@@ -173,8 +173,8 @@ export const NetworkBackground: React.FC<{ nodes?: NetworkNode[] }> = ({
             fill={node.color}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.16, 0.32, 0.16]
+              scale: [1, 1.25, 1],
+              opacity: [0.24, 0.5, 0.24]
             }}
             transition={{
               scale: { duration: 3, repeat: Infinity, delay: i * 0.5 },

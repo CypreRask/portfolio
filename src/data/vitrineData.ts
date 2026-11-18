@@ -55,6 +55,8 @@ export interface SecondaryWork {
   subtitle: LocalizedText;
   summary: LocalizedText;
   role: LocalizedText;
+  highlights?: LocalizedText[];
+  stack?: string[];
   image?: VisualAsset;
   links: ProjectLink[];
 }
@@ -237,8 +239,8 @@ export const mainProjects: MainProjectCase[] = [
       en: 'Turning university lectures into source-linked study sheets, quizzes, and a concept map',
     },
     cardSummary: {
-      fr: 'On importe un cours et l’application construit des fiches avec renvoi direct aux passages d’origine, des quiz adaptés à ses erreurs et une carte pour voir comment les notions s’enchaînent. Sur les sujets scientifiques, les exercices reposent sur de vrais calculs plutôt que sur du texte improvisé.',
-      en: 'Import a lecture and get structured study sheets linked back to exact passages, error-aware quizzes, and an interactive concept map. For physics and biology, interactive labs rely on verified mathematical models rather than improvised AI code.',
+      fr: 'Importe un cours pour obtenir des fiches reliées aux passages d’origine, des quiz adaptés aux erreurs et une carte interactive des notions.',
+      en: 'Import a lecture to get source-linked study sheets, error-aware quizzes, and an interactive concept map backed by verified scientific kernels.',
     },
     cover: {
       src: `${BASE}images/noepora-live.jpg`,
@@ -355,8 +357,8 @@ export const mainProjects: MainProjectCase[] = [
       en: 'An instrumented composter paired with a pixel-art web app to explore soil biology',
     },
     cardSummary: {
-      fr: 'Conçu à l’origine pour la Mission Éco-Responsable d’Université Côte d’Azur, le projet réunit un boîtier de capteurs autonome installé sur un composteur et un site interactif pour comprendre les cycles du carbone, de l’azote et de l’eau. Les données mesurées sur le terrain ont aussi servi à corriger l’installation elle-même.',
-      en: 'Initially created for Université Côte d’Azur’s Eco-Responsibility Office, Humuscope pairs a solar-powered sensor enclosure with an interactive pixel-art site explaining carbon, nitrogen, and water cycles. Field measurements also helped uncover and correct a placement limitation on the thermal probe.',
+      fr: 'Boîtier autonome solaire sur un composteur universitaire et interface en pixel art pour observer les cycles du sol et déceler les limites de mesure.',
+      en: 'Solar-powered composter sensor enclosure and pixel-art web interface tracking soil biology and enclosure-vs-core sensor behavior.',
     },
     cover: {
       src: `${BASE}images/humuscope-scene.jpg`,
@@ -463,14 +465,14 @@ export const mainProjects: MainProjectCase[] = [
     tag: { fr: 'Vision & Recherche', en: 'Vision & Research' },
     statusLabel: { fr: 'Prototype public · Recherche Inria', en: 'Public prototype · Inria work' },
     glow: 'chlorophyll',
-    title: { fr: 'Vision appliquée aux insectes', en: 'Computer vision for insects' },
+    title: { fr: 'Vision appliquée aux abeilles et insectes', en: 'Computer vision for honeybees and insects' },
     subtitle: {
-      fr: 'Du suivi de ruche au FabLab jusqu’à mes travaux de recherche à l’Inria',
-      en: 'From a campus FabLab smart-hive prototype to ongoing research work at Inria',
+      fr: 'Détection, suivi vidéo et réidentification entre SmartHive (FabLab) et travaux à l’Inria',
+      en: 'Detection, video tracking, and re-identification across SmartHive (FabLab) and Inria work',
     },
     cardSummary: {
-      fr: 'Comment repérer automatiquement des abeilles et des frelons asiatiques sur vidéo sans passer des heures à trier des images ? Ce parcours relie un prototype de ruche connectée développé au FabLab (code public sur GitHub) à mes travaux menés au Centre Inria d’Université Côte d’Azur depuis avril 2026.',
-      en: 'How can video systems detect honeybees and Asian hornets reliably without endless manual annotation? This thread connects a campus FabLab smart-hive prototype (public on GitHub) with my work at Centre Inria d’Université Côte d’Azur since April 2026.',
+      fr: 'Suivi vidéo d’abeilles et de frelons sur ruche connectée au FabLab (dépôt public), prolongé par des travaux en vision par ordinateur à l’Inria.',
+      en: 'Video monitoring of honeybees and hornets on a FabLab smart-hive prototype (public repo), extended through computer vision work at Inria.',
     },
     cover: {
       src: `${BASE}images/smarthive-ruche.jpg`,
@@ -485,21 +487,7 @@ export const mainProjects: MainProjectCase[] = [
         en: 'SmartHive hardware prototype (public CypreRask/Ruche-public repo at FabLab).',
       },
     },
-    gallery: [
-      {
-        src: `${BASE}images/smarthive-dashboard.png`,
-        width: 1024,
-        height: 485,
-        alt: {
-          fr: 'Interface de suivi temps réel SmartHive montrant les courbes et les détections vidéo',
-          en: 'SmartHive live monitoring dashboard showing telemetry charts and video detections',
-        },
-        caption: {
-          fr: 'Interface web du prototype SmartHive reliant mesures environnementales et alertes vidéo.',
-          en: 'Web interface from SmartHive combining sensor telemetry and video detection alerts.',
-        },
-      },
-    ],
+    gallery: [],
     links: [
       {
         label: { fr: 'Voir Ruche-public sur GitHub', en: 'View Ruche-public on GitHub' },
@@ -509,30 +497,30 @@ export const mainProjects: MainProjectCase[] = [
     ],
     story: {
       problem: {
-        fr: 'Surveiller une ruche ou étudier le comportement de pollinisateurs sur vidéo demande des modèles capables de fonctionner sur de nouveaux sites et de nouvelles conditions d’éclairage, sans devoir réannoter entièrement chaque jeu d’images.',
-        en: 'Monitoring beehives or pollinator behavior in video requires models that hold up across new sites and lighting conditions without re-annotating every new dataset from scratch.',
+        fr: 'Surveiller une ruche ou analyser le comportement de pollinisateurs sur vidéo demande des modèles fiables sous de nouvelles conditions d’éclairage et sur différents sites, sans réannoter chaque jeu d’images à la main.',
+        en: 'Monitoring a beehive or studying pollinator behavior in video requires models that hold up across new sites and lighting conditions without re-annotating every dataset from scratch.',
       },
       context: {
-        fr: 'Travail entamé au FabLab Valrose sur SmartHive (projet pédagogique repris sous l’encadrement de Didier Orlandi), puis prolongé au Centre Inria d’Université Côte d’Azur : stage de recherche d’avril à août 2026, suivi d’une collaboration extérieure depuis septembre 2026.',
-        en: 'Started at FabLab Valrose on SmartHive (a teaching project supervised by Didier Orlandi), then expanded at Centre Inria d’Université Côte d’Azur through a research internship (Apr-Aug 2026) and ongoing external collaboration since September 2026.',
+        fr: 'Travail démarré au FabLab Valrose sur SmartHive (projet pédagogique repris sous l’encadrement de Didier Orlandi), puis poursuivi au Centre Inria d’Université Côte d’Azur dans l’équipe STARS (encadrement : François Brémond), en stage d’avril à août 2026 puis comme collaborateur extérieur depuis septembre 2026.',
+        en: 'Started at FabLab Valrose on SmartHive (supervised by Didier Orlandi), then continued at Centre Inria d’Université Côte d’Azur in the STARS team (supervised by François Brémond), through an internship from April to August 2026 and as external collaborator since September 2026.',
       },
       role: {
-        fr: 'Sur SmartHive : développement de la brique de détection vidéo et de son intégration temps réel. À l’Inria : contribution aux pipelines de vision, campagnes de tests comparatifs et analyse des résultats.',
-        en: 'On SmartHive: main work on the video detection pipeline and real-time integration. At Inria: contribution to vision evaluation pipelines, comparative experiments, and result analysis.',
+        fr: 'Sur SmartHive : brique de détection vidéo d’abeilles et frelons et intégration temps réel. À l’Inria : méthodes de détection, suivi vidéo, réidentification, apprentissage actif et comparaisons sur plusieurs jeux de données.',
+        en: 'On SmartHive: video detection pipeline for honeybees and hornets and real-time integration. At Inria: detection, tracking, re-identification, active learning, and comparative evaluations across multiple datasets.',
       },
       built: {
-        fr: 'Côté public : un prototype fonctionnel en laboratoire combinant détection abeilles/frelons, suivi de ruche et tableau de bord web (CypreRask/Ruche-public). Côté Inria : des outils internes de détection, d’apprentissage actif et de suivi vidéo.',
-        en: 'Public side: a lab-working prototype pairing bee/hornet detection, hive telemetry, and a web dashboard (CypreRask/Ruche-public). At Inria: internal tooling for detection, active learning, and multi-frame tracking.',
+        fr: 'Dépôt public SmartHive (CypreRask/Ruche-public) réunissant détection abeilles/frelons, télémétrie de ruche et tableau de bord web. À l’Inria, chaîne logicielle interne pour le suivi vidéo, la sélection active et des protocoles comparatifs reproductibles.',
+        en: 'Public SmartHive repo (CypreRask/Ruche-public) pairing bee and hornet detection, hive telemetry, and a web dashboard. At Inria, internal pipelines for video tracking, active selection, and reproducible comparative evaluation.',
       },
       workingAndLimits: {
-        fr: 'Le code, les vidéos et les résultats internes du projet Inria restent confidentiels et ne sont pas publiés ici. Sur le prototype public SmartHive, le matériel est en cours de refonte pour tenir sur batterie dans la durée.',
-        en: 'Code, datasets, and internal metrics from the Inria project remain confidential and are not published here. On the public SmartHive prototype, hardware is being redesigned to achieve sustained battery autonomy.',
+        fr: 'Le code, les vidéos et les mesures internes du projet Inria sont confidentiels et ne sont pas diffusés ici. Sur SmartHive, la partie matérielle évolue pour gagner en autonomie sur batterie.',
+        en: 'Code, datasets, and internal metrics from the Inria project remain confidential and are not published here. On SmartHive, the hardware setup is evolving for longer battery operation.',
       },
     },
     technical: {
       optionsAndChoices: {
-        fr: 'Sur SmartHive : comparaison entre inférence déportée sur serveur et quantification embarquée sur Raspberry Pi, avec réflexion vers un déclenchement acoustique pour ne pas filmer en continu. Côté recherche : séparation stricte entre données utilisées pendant la mise au point et évaluation hors domaine, avec conservation explicite des pistes non concluantes.',
-        en: 'On SmartHive: comparing remote server inference against quantized on-device execution on Raspberry Pi, plus acoustic trigger concepts to reduce camera duty cycle. In research: strict separation between tuning data and external validation, explicitly retaining negative outcomes.',
+        fr: 'Sur SmartHive : comparaison entre inférence serveur et quantification embarquée sur Raspberry Pi, avec piste de déclenchement acoustique pour éviter la vidéo continue. À l’Inria : séparation stricte entre données de mise au point et validation externe, en conservant toutes les comparaisons négatives comme positives.',
+        en: 'On SmartHive: remote server inference compared with quantized Raspberry Pi execution, plus acoustic trigger ideas to reduce camera duty cycle. At Inria: strict split between tuning data and external validation, keeping negative as well as positive benchmark outcomes.',
       },
       architecture: [
         {
@@ -540,8 +528,8 @@ export const mainProjects: MainProjectCase[] = [
           en: 'SmartHive: LoRaWAN sensors (ABP -> TTN -> MQTT), FastAPI + WebSocket backend, YOLO/NCNN inference (~5 FPS on Raspberry Pi 4 at 320px), SvelteKit UI.',
         },
         {
-          fr: 'Travaux Inria : architecture modulaire séparant détection, sélection active, embeddings visuels, suivi temporel et registre d’expériences contrôlées.',
-          en: 'Inria pipeline: modular separation across detection, active selection, visual embeddings, tracking, and controlled experiment registries.',
+          fr: 'Inria (équipe STARS) : modules séparés pour détection, suivi temporel, réidentification, sélection active et registre d’expériences multi-jeux de données.',
+          en: 'Inria (STARS team): modular separation across detection, temporal tracking, re-identification, active selection, and multi-dataset experiment logs.',
         },
       ],
       testsAndMeasures: {
@@ -564,14 +552,29 @@ export const secondaryWorks: SecondaryWork[] = [
     statusLabel: { fr: 'En développement', en: 'In development' },
     title: { fr: 'Pythia & Héphaïstos', en: 'Pythia & Hephaistos' },
     subtitle: {
-      fr: 'Assistant IA local et boîtier vocal connecté en cours de montage',
-      en: 'Local AI assistant and an upcoming physical voice satellite',
+      fr: 'Assistant IA local et enceinte connectée sur ESP32-S3',
+      en: 'Local AI assistant and ESP32-S3 connected speaker',
     },
     summary: {
-      fr: 'Un assistant qui fait tourner des modèles de langage sur mes propres machines, couplé à un mode agent capable d’exécuter des tâches de programmation avec sauvegarde avant modification. Un petit satellite vocal physique avec micro et haut-parleur est en cours d’assemblage.',
-      en: 'A personal assistant running language models on local hardware, paired with an agent mode that handles coding tasks with safe rollback snapshots. A physical battery-powered voice speaker satellite is currently being assembled.',
+      fr: 'Assistant exécutant des modèles de langage sur mes machines locales avec mode agent et sauvegardes avant édition, complété par une enceinte connectée sur batterie (ESP32-S3, micro et haut-parleur) en cours de montage.',
+      en: 'Personal assistant running language models locally with an agent mode and snapshot rollbacks, paired with an upcoming battery-powered ESP32-S3 connected speaker.',
     },
     role: { fr: 'Projet personnel · Dépôt privé', en: 'Personal project · Private repo' },
+    highlights: [
+      {
+        fr: 'Exécution locale de modèles via llama.cpp sans dépendance cloud.',
+        en: 'Local model inference through llama.cpp without cloud dependency.',
+      },
+      {
+        fr: 'Système de sauvegarde et retour arrière avant modification de fichiers.',
+        en: 'Automatic snapshot rollback before automated file modifications.',
+      },
+      {
+        fr: 'Enceinte vocale ESP32-S3 N16R8 avec micro I2S INMP441 et ampli MAX98357A.',
+        en: 'ESP32-S3 N16R8 connected speaker build with INMP441 mic and MAX98357A amplifier.',
+      },
+    ],
+    stack: ['Python', 'llama.cpp', 'ESP32-S3', 'I2S Audio'],
     links: [],
   },
   {
@@ -580,14 +583,25 @@ export const secondaryWorks: SecondaryWork[] = [
     statusLabel: { fr: 'Usage local · Privé', en: 'Local use · Private' },
     title: { fr: 'MIDAS (SmartPortefeuille)', en: 'MIDAS (SmartPortefeuille)' },
     subtitle: {
-      fr: 'Suivi patrimonial sur mesure à comptabilité exacte',
-      en: 'Local portfolio tracker with exact accounting',
+      fr: 'Suivi patrimonial local à comptabilité déterministe',
+      en: 'Local portfolio tracker with exact deterministic accounting',
     },
     summary: {
-      fr: 'Application installée en local pour suivre des comptes, devises et opérations dans le temps. Les calculs financiers restent 100 % déterministes ; l’IA n’intervient que pour trier des informations et préparer des synthèses, sans jamais toucher aux chiffres de référence.',
-      en: 'Local-first tool to track multi-currency accounts and transactions over time. Accounting balances remain strictly deterministic; AI is confined to research and summaries without modifying reference figures.',
+      fr: 'Application locale pour suivre comptes, devises et opérations dans le temps. Les soldes reposent sur des calculs exacts en Decimal ; la couche IA sert uniquement à trier des synthèses sans jamais modifier les chiffres.',
+      en: 'Local-first tool tracking multi-currency accounts and transactions. Balances rely on exact Decimal ledger logic while AI assists only with research summaries.',
     },
     role: { fr: 'Projet personnel · Données privées', en: 'Personal project · Private data' },
+    highlights: [
+      {
+        fr: 'Grand livre immuable en ajout seul avec précision Decimal multi-devises.',
+        en: 'Append-only ledger maintaining exact Decimal multi-currency precision.',
+      },
+      {
+        fr: 'Séparation nette entre moteur comptable SQLite/DuckDB et module de synthèse IA.',
+        en: 'Strict separation between SQLite/DuckDB accounting and optional AI summaries.',
+      },
+    ],
+    stack: ['FastAPI', 'SvelteKit', 'SQLite', 'DuckDB'],
     links: [],
   },
   {
@@ -600,29 +614,51 @@ export const secondaryWorks: SecondaryWork[] = [
       en: 'Restoring a lab seismograph and streaming readings online',
     },
     summary: {
-      fr: 'Projet mené en équipe en deuxième année (avec Irem Su Cone et Alex Rognone, encadré par Didier Orlandi) pour réparer un sismographe inutilisé, vérifier sa calibration sur des séismes connus et transmettre ses relevés sur un serveur de l’université.',
-      en: 'Second-year team project (with Irem Su Cone and Alex Rognone, supervised by Didier Orlandi) to repair an unused lab seismograph, calibrate it against known earthquakes, and stream data to a university server.',
+      fr: 'Projet L2 en équipe (avec Irem Su Cone et Alex Rognone, encadré par Didier Orlandi) pour réparer un sismographe inutilisé, vérifier sa calibration sur des séismes connus et diffuser les relevés vers un serveur universitaire.',
+      en: 'Second-year group project (with Irem Su Cone and Alex Rognone, supervised by Didier Orlandi) repairing an unused lab seismograph, calibrating it on known events, and streaming readings to a campus server.',
     },
     role: {
-      fr: 'Diagnostic matériel, calibration et acquisition · Serveur universitaire actuellement hors ligne hors campus',
-      en: 'Hardware repair, calibration, and acquisition · University URL currently unreachable externally',
+      fr: 'Diagnostic matériel, calibration et acquisition',
+      en: 'Hardware repair, calibration, and acquisition',
     },
+    highlights: [
+      {
+        fr: 'Remise en état de la chaîne d’acquisition physique et vérification des signaux sur événements réels.',
+        en: 'Physical acquisition chain repair and calibration checks on real seismic events.',
+      },
+      {
+        fr: 'Serveur universitaire (eftis.univ-cotedazur.fr/sismographe) actuellement inaccessible hors réseau campus.',
+        en: 'Campus endpoint (eftis.univ-cotedazur.fr/sismographe) currently unreachable externally.',
+      },
+    ],
+    stack: ['Instrumentation', 'Raspberry Pi', 'Calibration', 'Acquisition'],
     links: [],
   },
   {
     id: 'neurone',
     domain: 'pedagogy',
-    statusLabel: { fr: 'Prototype pédagogique', en: 'Teaching prototype' },
+    statusLabel: { fr: 'Semaine du Cerveau', en: 'Brain Awareness Week' },
     title: { fr: 'Maquette Neurone & NeuroLab', en: 'Neuron model & NeuroLab' },
     subtitle: {
-      fr: 'Manipuler la transmission nerveuse sur maquette physique et sur simulateurs hors ligne',
-      en: 'Exploring neural signaling through a physical model and offline simulators',
+      fr: 'Maquette physique pour la Semaine du Cerveau et 7 simulateurs hors ligne',
+      en: 'Physical neuron model built for Brain Awareness Week and 7 offline simulators',
     },
     summary: {
-      fr: 'D’un côté, une maquette physique modulaire avec dendrites aimantées et LEDs pour montrer comment des signaux s’additionnent sur un neurone. De l’autre, NeuroLab : sept petits laboratoires interactifs utilisables sans connexion pour réviser la neurophysiologie.',
-      en: 'A modular physical neuron model with magnetic dendrites and LED membrane visualization, paired with NeuroLab: seven offline interactive neurophysiology labs.',
+      fr: 'Maquette modulaire à dendrites aimantées et LEDs réalisée pour la Semaine du Cerveau (électronique, modélisation 3D et code entièrement réalisés par mes soins), accompagnée de NeuroLab, sept laboratoires interactifs utilisables sans connexion.',
+      en: 'Modular physical neuron with magnetic dendrites and LED visualization built for Brain Awareness Week (electronics, 3D modeling, and software built by me), paired with seven offline interactive NeuroLab simulators.',
     },
-    role: { fr: 'Prototype personnel / FabLab', en: 'Personal / FabLab prototype' },
+    role: { fr: 'Matériel, modélisation et code · FabLab Valrose', en: 'Hardware, 3D & software · FabLab Valrose' },
+    highlights: [
+      {
+        fr: 'Sommation spatiale et temporelle rendue visible en direct par LEDs selon les dendrites connectées.',
+        en: 'Live spatial and temporal summation rendered through LEDs based on attached dendrites.',
+      },
+      {
+        fr: 'Sept laboratoires numériques hors ligne pour manipuler potentiels d’action et équilibre ionique.',
+        en: 'Seven offline interactive labs covering action potentials and ionic equilibria.',
+      },
+    ],
+    stack: ['Électronique', 'Modélisation 3D', 'Arduino / C++', 'Simulateurs Web'],
     image: {
       src: `${BASE}images/neurolab-modules.png`,
       width: 1440,
@@ -637,6 +673,35 @@ export const secondaryWorks: SecondaryWork[] = [
       },
     },
     links: [],
+  },
+  {
+    id: 'ypsa-web',
+    domain: 'software',
+    statusLabel: { fr: 'En ligne', en: 'Live site' },
+    title: { fr: 'Site du YPSA (ypsa.ch)', en: 'YPSA Website (ypsa.ch)' },
+    subtitle: {
+      fr: 'Site officiel du Youth Parliament of the Swiss Abroad',
+      en: 'Official platform for the Youth Parliament of the Swiss Abroad',
+    },
+    summary: {
+      fr: 'Conception et mise en ligne du site ypsa.ch pour présenter le parlement des jeunes Suisses de l’étranger, son comité et ses événements internationaux.',
+      en: 'Design and deployment of ypsa.ch presenting the Youth Parliament of the Swiss Abroad, its board, and its international events.',
+    },
+    role: { fr: 'Développement web · Comité YPSA', en: 'Web development · YPSA Board' },
+    highlights: [
+      {
+        fr: 'Site public multilingue en production utilisé par l’organisation et les représentations suisses.',
+        en: 'Public website in production supporting outreach and committee communications.',
+      },
+    ],
+    stack: ['Web', 'Déploiement', 'Design'],
+    links: [
+      {
+        label: { fr: 'Visiter ypsa.ch', en: 'Visit ypsa.ch' },
+        url: 'https://ypsa.ch/',
+        kind: 'external',
+      },
+    ],
   },
 ];
 
@@ -709,20 +774,20 @@ export const timelineItems: TimelineItem[] = [
       en: 'Apr - Aug 2026 (internship) · Since Sep 2026 (collaboration)',
     },
     title: {
-      fr: 'Stagiaire recherche, puis collaborateur extérieur',
-      en: 'Research Intern, then external collaborator',
+      fr: 'Stagiaire en vision par ordinateur, puis collaborateur extérieur',
+      en: 'Computer Vision Intern, then external collaborator',
     },
-    place: { fr: 'Centre Inria d’Université Côte d’Azur · Sophia Antipolis', en: 'Centre Inria d’Université Côte d’Azur · Sophia Antipolis' },
+    place: { fr: 'Centre Inria d’Université Côte d’Azur · Équipe STARS', en: 'Centre Inria d’Université Côte d’Azur · STARS Team' },
     detail: {
-      fr: 'Stage terminé en août 2026 sur un projet de vision appliquée aux insectes (détection, apprentissage actif, suivi vidéo), suivi d’une collaboration extérieure depuis septembre 2026.',
-      en: 'Completed research internship (Apr-Aug 2026) on insect computer vision (detection, active learning, tracking), followed by ongoing external collaboration since September 2026.',
+      fr: 'Stage terminé en août 2026 (encadrement : François Brémond) sur la vision appliquée aux abeilles et insectes (détection, suivi, réidentification, auto-entraînement), suivi d’une collaboration extérieure depuis septembre 2026.',
+      en: 'Completed internship (Apr-Aug 2026, supervised by François Brémond) on computer vision for honeybees and insects (detection, tracking, re-identification, self-training), followed by ongoing external collaboration since September 2026.',
     },
   },
   {
     id: 'eco-mission',
     period: {
-      fr: 'Août 2023 - déc. 2025 · Reprise depuis sept. 2026',
-      en: 'Aug 2023 - Dec 2025 · Resumed Sep 2026',
+      fr: 'Août 2023 - févr. 2026 · Reprise depuis sept. 2026',
+      en: 'Aug 2023 - Feb 2026 · Resumed Sep 2026',
     },
     title: {
       fr: 'Agent contractuel étudiant, Mission Éco-Responsable',
@@ -736,35 +801,25 @@ export const timelineItems: TimelineItem[] = [
   },
   {
     id: 'fablab',
-    period: { fr: 'Projets d’atelier', en: 'Workshop projects' },
-    title: { fr: 'FabLab Valrose', en: 'FabLab Valrose' },
-    place: { fr: 'Campus Valrose · Nice', en: 'Valrose Campus · Nice' },
+    period: { fr: 'Mai 2023 - en cours', en: 'May 2023 - present' },
+    title: { fr: 'FabLab Manager · FabLab Valrose', en: 'FabLab Manager · FabLab Valrose' },
+    place: { fr: 'Université Côte d’Azur · Campus Valrose', en: 'Université Côte d’Azur · Valrose Campus' },
     detail: {
-      fr: 'Projets collectifs encadrés par Didier Orlandi (sismographe universitaire, vision de la ruche connectée SmartHive) et prototypage de maquettes.',
-      en: 'Collaborative builds supervised by Didier Orlandi (university seismograph, SmartHive vision module) and hardware prototyping.',
+      fr: 'Gestion des machines et impressions 3D, accompagnement d’étudiants de la licence au master, et projets d’électronique et de vision encadrés par Didier Orlandi (sismographe, SmartHive, Semaine du Cerveau).',
+      en: 'Managing 3D printers and lab equipment, mentoring undergraduate to master students, and collaborative electronics/vision projects supervised by Didier Orlandi (seismograph, SmartHive, Brain Awareness Week).',
     },
   },
   {
     id: 'civic',
-    period: { fr: '2024 - en cours (YPSA) · 2025 - 2029 (CSE)', en: '2024 - present (YPSA) · 2025 - 2029 (CSA)' },
+    period: { fr: 'Juil. 2024 - en cours (YPSA) · 2025 - 2029 (CSE)', en: 'Jul 2024 - present (YPSA) · 2025 - 2029 (CSA)' },
     title: {
       fr: 'Délégué au Conseil des Suisses de l’étranger & comité YPSA',
       en: 'Delegate to the Council of the Swiss Abroad & YPSA Board',
     },
     place: { fr: 'Berne & international', en: 'Bern & international' },
     detail: {
-      fr: 'Représentation des Suisses de France au CSE (mandat 2025-2029), comité événements du Youth Parliament of the Swiss Abroad (YPSA) et réalisation du site ypsa.ch.',
+      fr: 'Représentation des Suisses de France au CSE (mandat 2025-2029), membre de l’Events Committee du Youth Parliament of the Swiss Abroad (YPSA) et réalisation du site ypsa.ch.',
       en: 'Representing Swiss residents in France at the CSA (2025-2029 term), Events Committee member of the Youth Parliament of the Swiss Abroad (YPSA), and creator of ypsa.ch.',
-    },
-  },
-  {
-    id: 'crete',
-    period: { fr: 'Juin - août 2021', en: 'Jun - Aug 2021' },
-    title: { fr: 'Stage en exploitation agricole', en: 'Agricultural farm internship' },
-    place: { fr: 'Grillo’s stable · Crète, Grèce', en: 'Grillo’s stable · Crete, Greece' },
-    detail: {
-      fr: 'Trois mois de travail sur site en environnement anglophone.',
-      en: 'Three months of field work in an international English-speaking environment.',
     },
   },
 ];
