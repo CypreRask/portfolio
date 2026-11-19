@@ -58,6 +58,7 @@ export interface SecondaryWork {
   highlights?: LocalizedText[];
   stack?: string[];
   image?: VisualAsset;
+  gallery?: VisualAsset[];
   links: ProjectLink[];
 }
 
@@ -89,10 +90,10 @@ export const copy = {
       contact: 'Contact',
     },
     hero: {
-      badge: 'L3 Bio-informatique · Université Côte d’Azur',
+      badge: 'L3 Sciences de la Vie · Bio-informatique · Université Côte d’Azur',
       option: 'Nice, France',
       name: 'Mathis Steinmann',
-      lead: 'Je construis des projets entre biologie, capteurs sur le terrain, vision artificielle et applications web. J’aime partir d’une question scientifique ou pratique pour aboutir à un outil ou un objet que l’on peut manipuler.',
+      lead: 'Je développe des projets à la croisée de la biologie, de l’informatique et de l’électronique. Vision par ordinateur, intelligence artificielle, capteurs, applications web ou impression 3D : j’aime autant comprendre un phénomène que construire les outils permettant de l’étudier.',
       ctaProjects: 'Découvrir les projets',
       ctaGithub: 'GitHub',
       ctaLinkedin: 'LinkedIn',
@@ -134,12 +135,12 @@ export const copy = {
       },
     },
     skills: {
-      title: 'Ce que je sais concevoir',
+      title: 'Savoir-faire',
       intro: 'De la biologie expérimentale aux systèmes autonomes et aux applications web.',
     },
     background: {
       title: 'Parcours',
-      intro: 'Formation en cours à Nice, recherche appliquée, mission universitaire et engagements.',
+      intro: 'Formation en cours à Nice, recherche appliquée, et mission universitaire.',
     },
     contact: {
       title: 'Contact',
@@ -158,10 +159,10 @@ export const copy = {
       contact: 'Contact',
     },
     hero: {
-      badge: 'BSc Bioinformatics (Year 3) · Université Côte d’Azur',
+      badge: 'BSc Life Sciences · Bioinformatics · Université Côte d’Azur',
       option: 'Nice, France',
       name: 'Mathis Steinmann',
-      lead: 'I build projects across biology, field sensors, computer vision, and web applications. I enjoy taking a scientific or practical question all the way to a working tool or physical object people can try.',
+      lead: 'I build projects at the crossroads of biology, computer science, and electronics. Computer vision, artificial intelligence, sensors, web applications, or 3D printing: I enjoy understanding a phenomenon as much as building the tools to study it.',
       ctaProjects: 'Explore projects',
       ctaGithub: 'GitHub',
       ctaLinkedin: 'LinkedIn',
@@ -203,12 +204,12 @@ export const copy = {
       },
     },
     skills: {
-      title: 'What I build',
+      title: 'Skills',
       intro: 'From experimental biology to autonomous hardware and live web applications.',
     },
     background: {
       title: 'Background',
-      intro: 'Undergraduate studies in Nice, research internship and collaboration, campus work, and civic roles.',
+      intro: 'Undergraduate studies in Nice, research internship and collaboration, and campus work.',
     },
     contact: {
       title: 'Contact',
@@ -235,12 +236,12 @@ export const mainProjects: MainProjectCase[] = [
     glow: 'chlorophyll',
     title: { fr: 'Noépora', en: 'Noépora' },
     subtitle: {
-      fr: 'Des cours universitaires transformés en fiches reliées aux sources, en questions et en carte des notions',
-      en: 'Turning university lectures into source-linked study sheets, quizzes, and a concept map',
+      fr: 'Apprendre et réviser à partir de ses propres cours, avec l’IA',
+      en: 'Learning and revising from your own lectures with AI',
     },
     cardSummary: {
-      fr: 'Importe un cours pour obtenir des fiches reliées aux passages d’origine, des quiz adaptés aux erreurs et une carte interactive des notions.',
-      en: 'Import a lecture to get source-linked study sheets, error-aware quizzes, and an interactive concept map backed by verified scientific kernels.',
+      fr: 'Une application de révision qui transforme des documents universitaires en fiches structurées, questions d’entraînement et cartes interactives de notions. L’accent est mis sur la fidélité aux sources, la couverture des cours et la vérification des contenus générés.',
+      en: 'A study app that turns university lectures into structured sheets, practice quizzes, and interactive concept maps, with a focus on source fidelity, syllabus coverage, and output verification.',
     },
     cover: {
       src: `${BASE}images/noepora-live.jpg`,
@@ -285,7 +286,7 @@ export const mainProjects: MainProjectCase[] = [
     ],
     links: [
       {
-        label: { fr: 'Essayer la démo', en: 'Try the live demo' },
+        label: { fr: 'Découvrir Noépora', en: 'Discover Noépora' },
         url: 'https://learn.noepora.fr/decouvrir',
         kind: 'demo',
       },
@@ -353,12 +354,12 @@ export const mainProjects: MainProjectCase[] = [
     glow: 'amber',
     title: { fr: 'Humuscope', en: 'Humuscope' },
     subtitle: {
-      fr: 'Un composteur instrumenté et une interface en pixel art pour observer la vie du sol',
-      en: 'An instrumented composter paired with a pixel-art web app to explore soil biology',
+      fr: 'Un composteur connecté pour explorer la vie du sol',
+      en: 'A connected composter to explore soil life',
     },
     cardSummary: {
-      fr: 'Boîtier autonome solaire sur un composteur universitaire et interface en pixel art pour observer les cycles du sol et déceler les limites de mesure.',
-      en: 'Solar-powered composter sensor enclosure and pixel-art web interface tracking soil biology and enclosure-vs-core sensor behavior.',
+      fr: 'Un composteur universitaire équipé de capteurs et d’un système de transmission autonome, accompagné d’un univers pédagogique interactif en pixel art. Les mesures permettent de suivre l’évolution du compost et de mieux comprendre les phénomènes biologiques qui s’y déroulent.',
+      en: 'A university composter equipped with sensors and an autonomous telemetry system, paired with an interactive pixel-art learning world to track compost evolution and soil biology.',
     },
     cover: {
       src: `${BASE}images/humuscope-scene.jpg`,
@@ -465,32 +466,46 @@ export const mainProjects: MainProjectCase[] = [
     tag: { fr: 'Vision & Recherche', en: 'Vision & Research' },
     statusLabel: { fr: 'Prototype public · Recherche Inria', en: 'Public prototype · Inria work' },
     glow: 'chlorophyll',
-    title: { fr: 'Vision appliquée aux abeilles et insectes', en: 'Computer vision for honeybees and insects' },
+    title: { fr: 'SmartHive & vision des insectes', en: 'SmartHive & insect vision' },
     subtitle: {
-      fr: 'Détection, suivi vidéo et réidentification entre SmartHive (FabLab) et travaux à l’Inria',
-      en: 'Detection, video tracking, and re-identification across SmartHive (FabLab) and Inria work',
+      fr: 'De la ruche connectée à la vision par ordinateur appliquée aux insectes',
+      en: 'From a connected beehive to computer vision applied to insects',
     },
     cardSummary: {
-      fr: 'Suivi vidéo d’abeilles et de frelons sur ruche connectée au FabLab (dépôt public), prolongé par des travaux en vision par ordinateur à l’Inria.',
-      en: 'Video monitoring of honeybees and hornets on a FabLab smart-hive prototype (public repo), extended through computer vision work at Inria.',
+      fr: 'SmartHive associe une ruche instrumentée à un système de détection d’abeilles et de frelons. En parallèle, mes travaux à l’Inria portent sur des méthodes de détection, de suivi vidéo, de réidentification et d’auto-entraînement, évaluées sur plusieurs jeux de données.',
+      en: 'SmartHive pairs an instrumented beehive with honeybee and hornet detection. In parallel, my work at Inria focuses on detection, video tracking, re-identification, and self-training methods evaluated across multiple datasets.',
     },
     cover: {
-      src: `${BASE}images/smarthive-ruche.jpg`,
-      width: 1600,
-      height: 1204,
+      src: `${BASE}images/ruche-abeilles.jpg`,
+      width: 1920,
+      height: 1080,
       alt: {
-        fr: 'Prototype de ruche connectée instrumentée issu du dépôt public SmartHive',
-        en: 'Instrumented smart-hive prototype from the public SmartHive repository',
+        fr: 'Entrée de la ruche connectée FabLab UniCA avec une vingtaine d’abeilles en activité',
+        en: 'FabLab UniCA connected beehive entrance with honeybees in activity',
       },
       caption: {
-        fr: 'Prototype matériel SmartHive (dépôt public CypreRask/Ruche-public au FabLab).',
-        en: 'SmartHive hardware prototype (public CypreRask/Ruche-public repo at FabLab).',
+        fr: 'Planche d’envol de la ruche instrumentée (FABLAB UniCA).',
+        en: 'Landing board of the instrumented beehive (FABLAB UniCA).',
       },
     },
-    gallery: [],
+    gallery: [
+      {
+        src: `${BASE}images/smarthive-ruche.jpg`,
+        width: 1600,
+        height: 1204,
+        alt: {
+          fr: 'Prototype matériel de ruche connectée issu du dépôt public SmartHive',
+          en: 'Instrumented smart-hive hardware prototype from the public SmartHive repository',
+        },
+        caption: {
+          fr: 'Prototype matériel SmartHive (dépôt public CypreRask/Ruche-public au FabLab).',
+          en: 'SmartHive hardware prototype (public CypreRask/Ruche-public repo at FabLab).',
+        },
+      },
+    ],
     links: [
       {
-        label: { fr: 'Voir Ruche-public sur GitHub', en: 'View Ruche-public on GitHub' },
+        label: { fr: 'Voir SmartHive sur GitHub', en: 'View SmartHive on GitHub' },
         url: 'https://github.com/CypreRask/Ruche-public',
         kind: 'github',
       },
@@ -552,56 +567,32 @@ export const secondaryWorks: SecondaryWork[] = [
     statusLabel: { fr: 'En développement', en: 'In development' },
     title: { fr: 'Pythia & Héphaïstos', en: 'Pythia & Hephaistos' },
     subtitle: {
-      fr: 'Assistant IA local et enceinte connectée sur ESP32-S3',
-      en: 'Local AI assistant and ESP32-S3 connected speaker',
+      fr: 'Un assistant IA local, vocal et visuel',
+      en: 'A local, voice, and vision AI assistant',
     },
     summary: {
-      fr: 'Assistant exécutant des modèles de langage sur mes machines locales avec mode agent et sauvegardes avant édition, complété par une enceinte connectée sur batterie (ESP32-S3, micro et haut-parleur) en cours de montage.',
-      en: 'Personal assistant running language models locally with an agent mode and snapshot rollbacks, paired with an upcoming battery-powered ESP32-S3 connected speaker.',
+      fr: 'Développement d’un assistant personnel fonctionnant avec des modèles d’IA locaux, combinant dialogue vocal, utilisation d’outils et assistance au code. Le projet comprend également une enceinte connectée sur ESP32-S3 et l’expérimentation d’une caméra ESP32-CAM.',
+      en: 'Personal assistant powered by local AI models, combining voice dialogue, tool use, and coding support, alongside an ESP32-S3 connected speaker and ESP32-CAM camera experiments.',
     },
     role: { fr: 'Projet personnel · Dépôt privé', en: 'Personal project · Private repo' },
-    highlights: [
-      {
-        fr: 'Exécution locale de modèles via llama.cpp sans dépendance cloud.',
-        en: 'Local model inference through llama.cpp without cloud dependency.',
-      },
-      {
-        fr: 'Système de sauvegarde et retour arrière avant modification de fichiers.',
-        en: 'Automatic snapshot rollback before automated file modifications.',
-      },
-      {
-        fr: 'Enceinte vocale ESP32-S3 N16R8 avec micro I2S INMP441 et ampli MAX98357A.',
-        en: 'ESP32-S3 N16R8 connected speaker build with INMP441 mic and MAX98357A amplifier.',
-      },
-    ],
-    stack: ['Python', 'llama.cpp', 'ESP32-S3', 'I2S Audio'],
+    stack: ['Python', 'llama.cpp', 'ESP32-S3', 'ESP32-CAM'],
     links: [],
   },
   {
     id: 'midas',
     domain: 'software',
-    statusLabel: { fr: 'Usage local · Privé', en: 'Local use · Private' },
-    title: { fr: 'MIDAS (SmartPortefeuille)', en: 'MIDAS (SmartPortefeuille)' },
+    statusLabel: { fr: 'Application locale · Données privées', en: 'Local app · Private data' },
+    title: { fr: 'MIDAS', en: 'MIDAS' },
     subtitle: {
-      fr: 'Suivi patrimonial local à comptabilité déterministe',
-      en: 'Local portfolio tracker with exact deterministic accounting',
+      fr: 'Suivi patrimonial, simulations et analyses quantitatives',
+      en: 'Wealth tracking, simulations, and quantitative analysis',
     },
     summary: {
-      fr: 'Application locale pour suivre comptes, devises et opérations dans le temps. Les soldes reposent sur des calculs exacts en Decimal ; la couche IA sert uniquement à trier des synthèses sans jamais modifier les chiffres.',
-      en: 'Local-first tool tracking multi-currency accounts and transactions. Balances rely on exact Decimal ledger logic while AI assists only with research summaries.',
+      fr: 'Application personnelle de suivi patrimonial réunissant comptes, placements, immobilier et devises. Elle permet d’analyser l’évolution d’un patrimoine, notamment en tenant compte de l’inflation, et sert de terrain d’expérimentation pour des méthodes de prévision combinant machine learning et modèles de langage.',
+      en: 'Personal wealth-tracking app bringing together accounts, equities, real estate, and currencies. It tracks inflation-adjusted performance and serves as a testbed for experimental ML and LLM forecasting methods.',
     },
-    role: { fr: 'Projet personnel · Données privées', en: 'Personal project · Private data' },
-    highlights: [
-      {
-        fr: 'Grand livre immuable en ajout seul avec précision Decimal multi-devises.',
-        en: 'Append-only ledger maintaining exact Decimal multi-currency precision.',
-      },
-      {
-        fr: 'Séparation nette entre moteur comptable SQLite/DuckDB et module de synthèse IA.',
-        en: 'Strict separation between SQLite/DuckDB accounting and optional AI summaries.',
-      },
-    ],
-    stack: ['FastAPI', 'SvelteKit', 'SQLite', 'DuckDB'],
+    role: { fr: 'Projet personnel · Approches prédictives expérimentales', en: 'Personal project · Experimental forecasting' },
+    stack: ['FastAPI', 'SvelteKit', 'Machine Learning', 'LLM'],
     links: [],
   },
   {
@@ -610,98 +601,87 @@ export const secondaryWorks: SecondaryWork[] = [
     statusLabel: { fr: 'Projet collectif L2', en: 'Year-2 group project' },
     title: { fr: 'Sismographe universitaire', en: 'University seismograph' },
     subtitle: {
-      fr: 'Remise en service d’un capteur de laboratoire et mise en ligne des mesures',
-      en: 'Restoring a lab seismograph and streaming readings online',
+      fr: 'Remettre en service un instrument scientifique',
+      en: 'Restoring a scientific instrument',
     },
     summary: {
-      fr: 'Projet L2 en équipe (avec Irem Su Cone et Alex Rognone, encadré par Didier Orlandi) pour réparer un sismographe inutilisé, vérifier sa calibration sur des séismes connus et diffuser les relevés vers un serveur universitaire.',
-      en: 'Second-year group project (with Irem Su Cone and Alex Rognone, supervised by Didier Orlandi) repairing an unused lab seismograph, calibrating it on known events, and streaming readings to a campus server.',
+      fr: 'Projet collectif de L2 consacré à la remise en état d’un sismographe universitaire, depuis le diagnostic matériel et la chaîne d’acquisition jusqu’à la visualisation et la transmission des mesures.',
+      en: 'Second-year group project restoring a university seismograph, from hardware diagnostics and the acquisition chain to live visualization and data transmission.',
     },
     role: {
-      fr: 'Diagnostic matériel, calibration et acquisition',
-      en: 'Hardware repair, calibration, and acquisition',
+      fr: 'Diagnostic matériel et acquisition',
+      en: 'Hardware repair and acquisition',
     },
     highlights: [
       {
-        fr: 'Remise en état de la chaîne d’acquisition physique et vérification des signaux sur événements réels.',
-        en: 'Physical acquisition chain repair and calibration checks on real seismic events.',
+        fr: 'Remise en état de la chaîne d’acquisition physique et transmission vers le serveur universitaire.',
+        en: 'Physical acquisition chain repair and telemetry to the university server.',
       },
       {
         fr: 'Serveur universitaire (eftis.univ-cotedazur.fr/sismographe) actuellement inaccessible hors réseau campus.',
         en: 'Campus endpoint (eftis.univ-cotedazur.fr/sismographe) currently unreachable externally.',
       },
     ],
-    stack: ['Instrumentation', 'Raspberry Pi', 'Calibration', 'Acquisition'],
+    stack: ['Instrumentation', 'Raspberry Pi', 'Électronique', 'Acquisition'],
+    image: {
+      src: `${BASE}images/sismographe.jpg`,
+      width: 1104,
+      height: 1472,
+      alt: {
+        fr: 'Sismographe vertical à ressort et bobine relié à l’interface d’acquisition sur PC',
+        en: 'Vertical spring-and-coil seismograph connected to the laptop acquisition UI',
+      },
+      caption: {
+        fr: 'Capteur remis en service et courbe d’acquisition en direct.',
+        en: 'Restored sensor and live acquisition curve.',
+      },
+    },
     links: [],
   },
   {
     id: 'neurone',
     domain: 'pedagogy',
     statusLabel: { fr: 'Semaine du Cerveau', en: 'Brain Awareness Week' },
-    title: { fr: 'Maquette Neurone & NeuroLab', en: 'Neuron model & NeuroLab' },
+    title: { fr: 'Maquette Neurone', en: 'Neuron Model' },
     subtitle: {
-      fr: 'Maquette physique pour la Semaine du Cerveau et 7 simulateurs hors ligne',
-      en: 'Physical neuron model built for Brain Awareness Week and 7 offline simulators',
+      fr: 'Une maquette interactive pour la Semaine du Cerveau',
+      en: 'An interactive model for Brain Awareness Week',
     },
     summary: {
-      fr: 'Maquette modulaire à dendrites aimantées et LEDs réalisée pour la Semaine du Cerveau (électronique, modélisation 3D et code entièrement réalisés par mes soins), accompagnée de NeuroLab, sept laboratoires interactifs utilisables sans connexion.',
-      en: 'Modular physical neuron with magnetic dendrites and LED visualization built for Brain Awareness Week (electronics, 3D modeling, and software built by me), paired with seven offline interactive NeuroLab simulators.',
+      fr: 'Conception d’une maquette de neurone imprimée en 3D, avec dendrites aimantées, électronique intégrée et visualisation des signaux sur une interface web. Elle a été utilisée pour expliquer de manière interactive le fonctionnement d’un neurone lors de la Semaine du Cerveau.',
+      en: '3D-printed neuron model with magnetic dendrites, integrated electronics, and web-based signal visualization, used to interactively explain how a neuron works during Brain Awareness Week.',
     },
     role: { fr: 'Matériel, modélisation et code · FabLab Valrose', en: 'Hardware, 3D & software · FabLab Valrose' },
-    highlights: [
-      {
-        fr: 'Sommation spatiale et temporelle rendue visible en direct par LEDs selon les dendrites connectées.',
-        en: 'Live spatial and temporal summation rendered through LEDs based on attached dendrites.',
-      },
-      {
-        fr: 'Sept laboratoires numériques hors ligne pour manipuler potentiels d’action et équilibre ionique.',
-        en: 'Seven offline interactive labs covering action potentials and ionic equilibria.',
-      },
-    ],
-    stack: ['Électronique', 'Modélisation 3D', 'Arduino / C++', 'Simulateurs Web'],
+    stack: ['Électronique', 'Modélisation 3D', 'Arduino / C++', 'Interface Web'],
     image: {
-      src: `${BASE}images/neurolab-modules.png`,
-      width: 1440,
-      height: 1000,
+      src: `${BASE}images/neurone-maquette.jpg`,
+      width: 1290,
+      height: 1140,
       alt: {
-        fr: 'Capture des modules interactifs de neurophysiologie NeuroLab',
-        en: 'Screenshot of interactive NeuroLab neurophysiology modules',
+        fr: 'Maquette physique du neurone imprimée en 3D avec dendrites aimantées et interface sur PC',
+        en: '3D-printed physical neuron model with magnetic dendrites and laptop interface',
       },
       caption: {
-        fr: 'NeuroLab : 7 simulateurs interactifs hors ligne.',
-        en: 'NeuroLab: 7 offline interactive simulators.',
+        fr: 'Maquette physique à la Semaine du Cerveau avec son interface temps réel.',
+        en: 'Physical model at Brain Awareness Week with its real-time interface.',
       },
     },
+    gallery: [
+      {
+        src: `${BASE}images/neurone-cablage.jpg`,
+        width: 1475,
+        height: 1469,
+        alt: {
+          fr: 'Câblage électronique interne du soma et contacts cuivre des dendrites',
+          en: 'Internal soma electronics wiring and copper dendrite contacts',
+        },
+        caption: {
+          fr: 'Électronique interne du soma et modules de dendrites aimantés.',
+          en: 'Internal soma wiring and magnetic dendrite modules.',
+        },
+      },
+    ],
     links: [],
-  },
-  {
-    id: 'ypsa-web',
-    domain: 'software',
-    statusLabel: { fr: 'En ligne', en: 'Live site' },
-    title: { fr: 'Site du YPSA (ypsa.ch)', en: 'YPSA Website (ypsa.ch)' },
-    subtitle: {
-      fr: 'Site officiel du Youth Parliament of the Swiss Abroad',
-      en: 'Official platform for the Youth Parliament of the Swiss Abroad',
-    },
-    summary: {
-      fr: 'Conception et mise en ligne du site ypsa.ch pour présenter le parlement des jeunes Suisses de l’étranger, son comité et ses événements internationaux.',
-      en: 'Design and deployment of ypsa.ch presenting the Youth Parliament of the Swiss Abroad, its board, and its international events.',
-    },
-    role: { fr: 'Développement web · Comité YPSA', en: 'Web development · YPSA Board' },
-    highlights: [
-      {
-        fr: 'Site public multilingue en production utilisé par l’organisation et les représentations suisses.',
-        en: 'Public website in production supporting outreach and committee communications.',
-      },
-    ],
-    stack: ['Web', 'Déploiement', 'Design'],
-    links: [
-      {
-        label: { fr: 'Visiter ypsa.ch', en: 'Visit ypsa.ch' },
-        url: 'https://ypsa.ch/',
-        kind: 'external',
-      },
-    ],
   },
 ];
 
@@ -711,8 +691,8 @@ export const skillPillars: SkillPillar[] = [
     icon: 'dna',
     title: { fr: 'Biologie et expérimentation', en: 'Biology and experimental work' },
     summary: {
-      fr: 'Traduire une question biologique en mesures concrètes et savoir ce que les capteurs disent vraiment ou non.',
-      en: 'Turning biological questions into field measurements while keeping sensor limits clear.',
+      fr: 'Conception de dispositifs et de méthodes pour observer, mesurer et analyser des phénomènes biologiques.',
+      en: 'Designing devices and methods to observe, measure, and analyze biological phenomena.',
     },
   },
   {
@@ -720,35 +700,44 @@ export const skillPillars: SkillPillar[] = [
     icon: 'eye',
     title: { fr: 'Vision par ordinateur', en: 'Computer vision' },
     summary: {
-      fr: 'Détection et suivi d’insectes sur vidéo, tests comparatifs multi-graines et attention aux biais de jeux de données.',
-      en: 'Insect detection and tracking on video, controlled benchmarks, and dataset generalization checks.',
+      fr: 'Détection, suivi et réidentification d’objets sur vidéo, avec développement en Python et PyTorch, évaluations comparatives et analyse des limites expérimentales.',
+      en: 'Object detection, tracking, and re-identification in video with Python and PyTorch, comparative benchmarks, and analysis of experimental limits.',
     },
   },
   {
     id: 'hardware',
     icon: 'cpu',
-    title: { fr: 'Capteurs et systèmes autonomes', en: 'Sensors and field electronics' },
+    title: { fr: 'Électronique et systèmes embarqués', en: 'Electronics and embedded systems' },
     summary: {
-      fr: 'Conception de boîtiers sur batterie et solaire, transmission longue portée et remise en état d’instruments de laboratoire.',
-      en: 'Solar and battery-powered sensor enclosures, long-range radio links, and lab instrument retrofits.',
+      fr: 'Prototypage de dispositifs de mesure, intégration de capteurs, communication sans fil et acquisition de données sur ESP32, Arduino et Raspberry Pi.',
+      en: 'Prototyping measurement devices, sensor integration, wireless telemetry, and data acquisition on ESP32, Arduino, and Raspberry Pi.',
     },
   },
   {
     id: 'software',
     icon: 'code',
-    title: { fr: 'Applications web et données', en: 'Web apps and data pipelines' },
+    title: { fr: 'Développement logiciel et données', en: 'Software development and data' },
     summary: {
-      fr: 'Développement complet d’applications utilisables en ligne, avec bases de données propres et calculs fiables.',
-      en: 'Building complete deployed web tools backed by clean databases and verified calculations.',
+      fr: 'Développement d’applications web complètes, de leurs interfaces aux services backend, en passant par le stockage et le traitement des données.',
+      en: 'Building full-stack web applications from user interfaces to backend services, data storage, and processing pipelines.',
     },
   },
   {
     id: 'ai',
     icon: 'compass',
-    title: { fr: 'Fiabilisation de l’IA', en: 'Making AI outputs reliable' },
+    title: { fr: 'Intelligence artificielle', en: 'Artificial intelligence' },
     summary: {
-      fr: 'Contrôler les modèles par des tests automatiques, des liens vers les sources et des calculs déterministes.',
-      en: 'Keeping language models grounded with automated tests, source links, and deterministic kernels.',
+      fr: 'Intégration de modèles locaux et distants, expérimentation de pipelines de génération et mise en place de mécanismes de vérification.',
+      en: 'Integrating local and remote models, experimenting with generation pipelines, and implementing output verification mechanisms.',
+    },
+  },
+  {
+    id: 'fablab',
+    icon: 'cpu',
+    title: { fr: 'Impression 3D et prototypage', en: '3D printing and prototyping' },
+    summary: {
+      fr: 'Conception CAO, fabrication additive, intégration électronique et accompagnement de projets au FabLab Valrose.',
+      en: 'CAD modeling, additive manufacturing, electronics integration, and project mentoring at FabLab Valrose.',
     },
   },
 ];
@@ -763,8 +752,8 @@ export const timelineItems: TimelineItem[] = [
     },
     place: { fr: 'Université Côte d’Azur · Nice', en: 'Université Côte d’Azur · Nice' },
     detail: {
-      fr: 'Biologie, biostatistiques, génomique et informatique appliquée.',
-      en: 'Biology, biostatistics, genomics, and applied computer science.',
+      fr: 'Biologie, génomique, bio-informatique et programmation.',
+      en: 'Biology, genomics, bioinformatics, and programming.',
     },
   },
   {
@@ -790,8 +779,8 @@ export const timelineItems: TimelineItem[] = [
       en: 'Aug 2023 - Feb 2026 · Resumed Sep 2026',
     },
     title: {
-      fr: 'Agent contractuel étudiant, Mission Éco-Responsable',
-      en: 'Student Contract Staff, Eco-Responsibility Office',
+      fr: 'Service civique puis contrat étudiant · Mission Éco-Responsable',
+      en: 'Civic service & student contract · Eco-Responsibility Office',
     },
     place: { fr: 'Université Côte d’Azur · Nice', en: 'Université Côte d’Azur · Nice' },
     detail: {
@@ -807,19 +796,6 @@ export const timelineItems: TimelineItem[] = [
     detail: {
       fr: 'Gestion des machines et impressions 3D, accompagnement d’étudiants de la licence au master, et projets d’électronique et de vision encadrés par Didier Orlandi (sismographe, SmartHive, Semaine du Cerveau).',
       en: 'Managing 3D printers and lab equipment, mentoring undergraduate to master students, and collaborative electronics/vision projects supervised by Didier Orlandi (seismograph, SmartHive, Brain Awareness Week).',
-    },
-  },
-  {
-    id: 'civic',
-    period: { fr: 'Juil. 2024 - en cours (YPSA) · 2025 - 2029 (CSE)', en: 'Jul 2024 - present (YPSA) · 2025 - 2029 (CSA)' },
-    title: {
-      fr: 'Délégué au Conseil des Suisses de l’étranger & comité YPSA',
-      en: 'Delegate to the Council of the Swiss Abroad & YPSA Board',
-    },
-    place: { fr: 'Berne & international', en: 'Bern & international' },
-    detail: {
-      fr: 'Représentation des Suisses de France au CSE (mandat 2025-2029), membre de l’Events Committee du Youth Parliament of the Swiss Abroad (YPSA) et réalisation du site ypsa.ch.',
-      en: 'Representing Swiss residents in France at the CSA (2025-2029 term), Events Committee member of the Youth Parliament of the Swiss Abroad (YPSA), and creator of ypsa.ch.',
     },
   },
 ];

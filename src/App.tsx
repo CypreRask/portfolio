@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
   ArrowRight,
-  ChevronDown,
   Compass,
   Cpu,
   Code,
@@ -45,12 +44,13 @@ const pillarIcons = {
   compass: Compass,
 };
 
+const CASE_STUDIES_ENABLED = false;
+
 export function App() {
   const { lang, setLang, activeCase, openCase, closeCase, theme, toggleTheme } =
     usePortfolioState();
   const [showcaseSlug, setShowcaseSlug] = useState<CaseSlug>('noepora');
   const [domainFilter, setDomainFilter] = useState<FilterDomain>('all');
-  const [expandedSecondary, setExpandedSecondary] = useState<Record<string, boolean>>({});
   const [secondaryLightbox, setSecondaryLightbox] = useState<VisualAsset | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -64,7 +64,8 @@ export function App() {
   }, [secondaryLightbox]);
 
   const t = copy[lang];
-  const activeProject = activeCase
+  // Case studies are kept in code but hidden in this simplified version.
+  const activeProject = CASE_STUDIES_ENABLED && activeCase
     ? mainProjects.find((p) => p.slug === activeCase) ?? null
     : null;
   const showcaseProject =
@@ -371,7 +372,7 @@ export function App() {
                               ? 'Noépora'
                               : p.slug === 'humuscope'
                               ? 'Humuscope'
-                              : 'Abeilles / Inria'}
+                              : 'SmartHive'}
                           </button>
                         ))}
                       </div>
@@ -379,8 +380,8 @@ export function App() {
 
                     <button
                       type="button"
-                      onClick={() => openCase(showcaseProject.slug)}
-                      aria-label={`${t.hero.openProject} : ${showcaseProject.title[lang]}`}
+                      onClick={() => setSecondaryLightbox(showcaseProject.cover)}
+                      aria-label={`${lang === 'fr' ? 'Agrandir' : 'Enlarge'} : ${showcaseProject.title[lang]}`}
                       className="group relative block w-full rounded-xl overflow-hidden border border-border bg-black/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       <img
@@ -392,17 +393,17 @@ export function App() {
                       />
                     </button>
 
-                    <div className="pt-3.5 px-1 flex flex-wrap items-center justify-between gap-3">
+                    <div className="pt-3.5 px-1 flex flex-wrap items-start justify-between gap-3">
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-semibold truncate">
+                        <div className="text-sm font-semibold leading-snug">
                           {showcaseProject.title[lang]}
                         </div>
-                        <p className="text-xs text-muted-foreground line-clamp-1">
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
                           {showcaseProject.subtitle[lang]}
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-shrink-0">
                         {showcaseProject.links[0] && (
                           <a
                             href={showcaseProject.links[0].url}
@@ -418,14 +419,6 @@ export function App() {
                             <span className="hidden sm:inline">{showcaseProject.links[0].label[lang]}</span>
                           </a>
                         )}
-                        <button
-                          type="button"
-                          onClick={() => openCase(showcaseProject.slug)}
-                          className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-lg bg-primary/15 text-primary text-xs font-semibold hover:bg-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
-                        >
-                          {t.hero.openProject}
-                          <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                        </button>
                       </div>
                     </div>
                   </GlassCard>
@@ -450,8 +443,8 @@ export function App() {
                     <div>
                       <button
                         type="button"
-                        onClick={() => openCase(project.slug)}
-                        aria-label={`${t.projects.readStory} : ${project.title[lang]}`}
+                        onClick={() => setSecondaryLightbox(project.cover)}
+                        aria-label={`${lang === 'fr' ? 'Agrandir' : 'Enlarge'} : ${project.title[lang]}`}
                         className="group relative block w-full overflow-hidden border-b border-border bg-black/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       >
                         <img
@@ -462,11 +455,27 @@ export function App() {
                           alt={project.cover.alt[lang]}
                           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         />
-                        <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/70 text-white text-[11px] font-medium opacity-85 group-hover:opacity-100 transition-opacity">
-                          {t.projects.readStory}
-                          <ArrowRight className="w-3 h-3" aria-hidden="true" />
-                        </span>
                       </button>
+                      {project.gallery.length > 1 && (
+                        <div className="flex gap-2 px-5 sm:px-6 pt-4">
+                          {project.gallery.slice(0, 4).map((img) => (
+                            <button
+                              key={img.src}
+                              type="button"
+                              onClick={() => setSecondaryLightbox(img)}
+                              aria-label={img.alt[lang]}
+                              className="flex-1 overflow-hidden rounded-lg border border-border bg-black/10 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                            >
+                              <img
+                                src={img.src}
+                                alt=""
+                                loading="lazy"
+                                className="w-full h-14 object-cover transition-transform duration-300 hover:scale-105"
+                              />
+                            </button>
+                          ))}
+                        </div>
+                      )}
 
                       <div className="p-5 sm:p-6 space-y-3">
                         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -497,15 +506,6 @@ export function App() {
                     </div>
 
                     <div className="p-5 sm:p-6 pt-0 flex flex-wrap gap-2.5">
-                      <button
-                        type="button"
-                        onClick={() => openCase(project.slug)}
-                        className="inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs sm:text-sm font-semibold hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-opacity"
-                      >
-                        {t.projects.readStory}
-                        <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                      </button>
-
                       {project.links.map((link) => (
                         <a
                           key={link.url}
@@ -570,7 +570,6 @@ export function App() {
 
               <div className="grid md:grid-cols-2 gap-6">
                 {filteredSecondary.map((work) => {
-                  const isExpanded = !!expandedSecondary[work.id];
                   return (
                     <GlassCard key={work.id} className="p-5 sm:p-6 flex flex-col justify-between gap-4">
                       <div className="space-y-3">
@@ -591,9 +590,11 @@ export function App() {
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           {work.summary[lang]}
                         </p>
+                      </div>
 
-                        {work.image && (
-                          <figure className="rounded-xl overflow-hidden border border-border">
+                      <div className="mt-auto space-y-4">
+                        {work.image && !work.gallery?.length && (
+                          <figure className="rounded-xl overflow-hidden border border-border bg-black/25">
                             <button
                               type="button"
                               onClick={() => setSecondaryLightbox(work.image!)}
@@ -606,7 +607,7 @@ export function App() {
                                 height={work.image.height}
                                 loading="lazy"
                                 alt={work.image.alt[lang]}
-                                className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                                className="w-full h-52 sm:h-56 object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                               />
                               <span className="absolute bottom-2.5 right-2.5 inline-flex items-center justify-center w-7 h-7 rounded-lg bg-black/65 text-white opacity-80 group-hover:opacity-100 transition-opacity">
                                 <Maximize2 className="w-3.5 h-3.5" aria-hidden="true" />
@@ -618,19 +619,37 @@ export function App() {
                           </figure>
                         )}
 
-                        {isExpanded && work.highlights && work.highlights.length > 0 && (
-                          <ul className="space-y-1.5 pt-2 border-t border-border/60 text-xs sm:text-sm text-muted-foreground">
-                            {work.highlights.map((h) => (
-                              <li key={h.fr} className="flex items-start gap-2">
-                                <span className="text-primary mt-1">•</span>
-                                <span>{h[lang]}</span>
-                              </li>
+                        {work.image && work.gallery && work.gallery.length > 0 && (
+                          <div className="grid grid-cols-2 gap-2.5">
+                            {[work.image, ...work.gallery].map((img) => (
+                              <figure key={img.src} className="rounded-xl overflow-hidden border border-border bg-black/25 flex flex-col">
+                                <button
+                                  type="button"
+                                  onClick={() => setSecondaryLightbox(img)}
+                                  aria-label={`${lang === 'fr' ? 'Agrandir' : 'Enlarge'}: ${img.alt[lang]}`}
+                                  className="group relative block w-full overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                                >
+                                  <img
+                                    src={img.src}
+                                    width={img.width}
+                                    height={img.height}
+                                    loading="lazy"
+                                    alt={img.alt[lang]}
+                                    className="w-full h-52 sm:h-56 object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                                  />
+                                  <span className="absolute bottom-2 right-2 inline-flex items-center justify-center w-6 h-6 rounded-lg bg-black/65 text-white opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <Maximize2 className="w-3 h-3" aria-hidden="true" />
+                                  </span>
+                                </button>
+                                <figcaption className="px-2.5 py-1.5 text-[11px] text-muted-foreground bg-muted/40 flex-1">
+                                  {img.caption[lang]}
+                                </figcaption>
+                              </figure>
                             ))}
-                          </ul>
+                          </div>
                         )}
-                      </div>
 
-                      <div className="pt-2 flex flex-wrap items-center justify-between gap-2">
+                        <div className="pt-1 flex flex-wrap items-center justify-between gap-2">
                         <div className="flex flex-wrap gap-1.5">
                           {work.stack?.map((tag) => (
                             <span
@@ -655,33 +674,7 @@ export function App() {
                               {link.label[lang]}
                             </a>
                           ))}
-                          {work.highlights && work.highlights.length > 0 && (
-                            <button
-                              type="button"
-                              aria-expanded={isExpanded}
-                              onClick={() =>
-                                setExpandedSecondary((prev) => ({
-                                  ...prev,
-                                  [work.id]: !prev[work.id],
-                                }))
-                              }
-                              className="inline-flex items-center gap-1 min-h-[36px] px-3 py-1 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
-                            >
-                              {isExpanded
-                                ? lang === 'fr'
-                                  ? 'Réduire'
-                                  : 'Hide details'
-                                : lang === 'fr'
-                                ? 'Détails'
-                                : 'Details'}
-                              <ChevronDown
-                                className={`w-3.5 h-3.5 transition-transform ${
-                                  isExpanded ? 'rotate-180' : ''
-                                }`}
-                                aria-hidden="true"
-                              />
-                            </button>
-                          )}
+                        </div>
                         </div>
                       </div>
                     </GlassCard>
@@ -778,7 +771,7 @@ export function App() {
             <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t border-border/60">
               <GlassCard className="p-6 sm:p-8" glow="chlorophyll" hover={false}>
                 <div className="grid lg:grid-cols-12 gap-8 items-center">
-                  <div className="lg:col-span-5 space-y-3">
+                  <div className="lg:col-span-4 space-y-3">
                     <h2 className="text-3xl font-bold">{t.contact.title}</h2>
                     <p className="text-sm sm:text-base text-muted-foreground">
                       {t.contact.intro}
@@ -789,14 +782,14 @@ export function App() {
                     </div>
                   </div>
 
-                  <div className="lg:col-span-7 grid sm:grid-cols-3 gap-4">
+                  <div className="lg:col-span-8 grid sm:grid-cols-2 lg:grid-cols-12 gap-4">
                     <a
                       href={`mailto:${contactLinks.email}`}
-                      className="rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                      className="sm:col-span-2 lg:col-span-5 rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
                     >
                       <Mail className="w-5 h-5 text-emerald-500 mb-2.5" aria-hidden="true" />
                       <div className="text-xs text-muted-foreground">Email</div>
-                      <div className="text-xs sm:text-sm font-medium mt-1 break-all">
+                      <div className="text-xs sm:text-sm font-medium mt-1 break-words">
                         {contactLinks.email}
                       </div>
                     </a>
@@ -805,7 +798,7 @@ export function App() {
                       href={contactLinks.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                      className="lg:col-span-4 rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
                     >
                       <Github className="w-5 h-5 mb-2.5" aria-hidden="true" />
                       <div className="text-xs text-muted-foreground">GitHub</div>
@@ -818,7 +811,7 @@ export function App() {
                       href={contactLinks.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+                      className="lg:col-span-3 rounded-xl border border-border p-4 bg-muted/30 hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
                     >
                       <Linkedin className="w-5 h-5 text-blue-500 mb-2.5" aria-hidden="true" />
                       <div className="text-xs text-muted-foreground">LinkedIn</div>
