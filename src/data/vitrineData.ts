@@ -224,7 +224,7 @@ export const contactLinks = {
   email: 'mathis.steinmann@outlook.fr',
   github: 'https://github.com/CypreRask',
   githubLabel: 'github.com/CypreRask',
-  linkedin: 'https://www.linkedin.com/in/mathis-steinmann-93b5851b9/',
+  linkedin: 'https://www.linkedin.com/in/steinmann-mathis/',
   linkedinLabel: 'Mathis Steinmann',
 };
 
