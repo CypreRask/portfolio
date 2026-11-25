@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cyprerask.github.io/portfolio/sitemap.xml
