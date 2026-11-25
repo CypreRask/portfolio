@@ -33,5 +33,5 @@ npm run build
 ## Contact
 
 - GitHub : [github.com/CypreRask](https://github.com/CypreRask)
-- LinkedIn : [Mathis Steinmann](https://www.linkedin.com/in/mathis-steinmann-93b5851b9/)
+- LinkedIn : [Mathis Steinmann](https://www.linkedin.com/in/steinmann-mathis/)
 - Email : `mathis.steinmann@outlook.fr`
