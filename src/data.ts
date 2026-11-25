@@ -1,7 +1,7 @@
 // ============================================
 // MATHIS STEINMANN - PORTFOLIO DATA
 // ============================================
-// Edit this file to update content across the site
+// Synchronisé avec les données de la vitrine en ligne (vitrineData.ts)
 
 export type ProjectStatus = 'deployed' | 'prototype' | 'wip';
 export type ProjectCategory = 'iot' | 'ai' | 'bio' | 'systems' | 'finance';
@@ -44,172 +44,134 @@ export interface Skill {
 
 export const projects: Project[] = [
   {
-    id: 'composteur-v2',
-    title: 'Composteur Connecté V2',
-    subtitle: 'IoT full stack — monitoring biologique',
-    category: 'iot',
-    status: 'wip',
-    description: 'Projet solo de suivi de compost réalisé pour la Mission Éco-Responsable de l\'Université Côte d\'Azur (UniCA). Une V1 a été déployée sur site pendant un temps (retours terrain), et la V2 est en cours avec davantage de capteurs et un objectif pédagogique : suivre les phases du compost et comparer des protocoles d\'apports (ex: compost incluant des agrumes). Pipeline : capteurs → LoRaWAN (Heltec LoRa 32 V3) → TTN → MQTT → API FastAPI → stockage SQLite (compost.db via SQLModel) → dashboard → analyses et prédictions (Pandas/Scikit-learn).',
-    problem: 'L\'évaluation “à l’œil” fonctionne, mais elle ne suffit pas pour comparer objectivement des protocoles d\'apports ni pour surveiller finement la dynamique (tendances, anomalies, signaux faibles).',
-    solution: 'Instrumenter le composteur, centraliser les mesures dans une API + base locale, puis produire des visualisations et des prédictions simples pour interpréter l\'évolution et comparer des protocoles d\'apports.',
-    architecture: [
-      'ESP32 : multiplexage capteurs + gestion énergie (MOSFET, sleep)',
-      'Trame binaire compacte avec CRC pour intégrité',
-      'Heltec LoRa 32 V3 → LoRaWAN → TTN → MQTT',
-      'Backend FastAPI (Python) : endpoints + pipeline d\'ingestion',
-      'SQLite (compost.db) via SQLModel',
-      'Dashboard web : visualisation, export et suivi des phases',
-      'Data/ML : Pandas + Scikit-learn (prédictions simples)'
-    ],
-    demonstrations: [
-      'Électronique analogique : conditionnement, multiplexage, énergie',
-      'IoT/LoRaWAN : payload, intégration TTN → MQTT, robustesse terrain',
-      'Backend API : REST, modèles de données (SQLModel), persistance SQLite',
-      'Données : séries temporelles, visualisation, indicateurs de phase',
-      'ML : features simples + modèles Scikit-learn pour prédiction/tendance',
-      'Intégration système : bout en bout, du capteur à l\'UI'
-    ],
-    technologies: ['ESP32', 'LoRaWAN', 'Monitoring', 'FastAPI', 'SQLite', 'Data/ML'],
-    links: [
-      { label: 'GitHub', url: 'https://github.com/CypreRask/Composteur-public' }
-    ]
-  },
-  {
-    id: 'ruche-jpo',
-    title: 'Ruche Connectée Intelligente',
-    subtitle: 'Télémétrie LoRaWAN + vision (abeilles / frelons)',
-    category: 'iot',
-    status: 'wip',
-    description: 'Au sein du fablab, projet de ruche connectée repris d\'un projet initié dans un cadre pédagogique (encadrement Didier Orlandi). Une première version avait déjà été testée avant moi ; je développe et itère surtout la brique vision. Objectif : combiner télémétrie (température, humidité, poids) et détection vidéo (abeilles / frelons) pour suivre l\'activité et déclencher des alertes. Actuellement en phase labo, avec extension prévue vers des capteurs audio.',
-    problem: 'La surveillance manuelle est chronophage et la détection de situations à risque (ex: présence de frelons) arrive trop tard. Il faut un système autonome qui mesure l\'état de la ruche et détecte visuellement des événements, sous fortes contraintes d\'énergie et de connectivité.',
-    solution: 'Architecture modulaire : capteurs LoRaWAN (ABP) pour la télémétrie basse conso + pipeline YOLO pour la détection (PC ou embarqué sur Raspberry Pi via NCNN). Les données et événements sont centralisés via TTN/MQTT et une API temps réel, puis visualisés sur un dashboard Svelte.',
-    architecture: [
-      'Capteurs (temp/hum/poids) → LoRaWAN ABP → TTN → MQTT',
-      'Backend FastAPI : ingestion télémétrie + événements vision',
-      'Temps réel : WebSocket (diffusion des mesures/alertes)',
-      'Vision : YOLO (plusieurs modèles) ; exécution PC ou Raspberry Pi (NCNN)',
-      'Dashboard Svelte : données, alertes, historique'
-    ],
-    demonstrations: [
-      'Vision par ordinateur : dataset → entraînement → export/optimisation → inférence',
-      'Déploiement multi-cibles : PC (labo) et edge (Raspberry Pi via NCNN)',
-      'IoT/RF : LoRaWAN ABP, payload, intégration TTN → MQTT',
-      'Backend temps réel : REST + WebSocket, agrégation multi-sources',
-      'Frontend : dashboard Svelte orienté monitoring + alertes'
-    ],
-    technologies: ['LoRaWAN', 'Vision IA', 'Temps réel', 'Edge', 'Dashboard', 'YOLO'],
-    links: [
-      { label: 'GitHub', url: 'https://github.com/CypreRask/Ruche-public' }
-    ]
-  },
-  {
-    id: 'smartrecall-v2',
-    title: 'SmartRecall — Plateforme d\'Apprentissage Cognitif',
-    subtitle: 'Répétition espacée augmentée par IA et analyse sémantique',
+    id: 'noepora',
+    title: 'Noépora',
+    subtitle: 'Apprendre et réviser à partir de ses propres cours, avec l\'IA',
     category: 'ai',
-    status: 'prototype',
-    description: 'Plateforme d\'apprentissage adaptatif combinant répétition espacée, génération assistée par IA et recherche sémantique (RAG). Architecture full-stack avec PostgreSQL + recherche vectorielle (pgvector), ingestion de documents et interface web.',
-    problem: 'L\'apprentissage classique ignore les connexions sémantiques entre concepts, les patterns d\'erreurs récurrents et l\'optimisation temporelle. Les outils existants (Anki) sont statiques et ne modélisent pas la compréhension dynamiquement.',
-    solution: 'Architecture cognitive : moteur RAG pour l\'ingestion/recherche, modèle de progression (répétition espacée + signaux), et génération de quiz structurée avec validation.',
+    status: 'deployed',
+    description: 'Application web de révision qui transforme des documents universitaires en fiches structurées, questions d\'entraînement et cartes interactives de notions, avec démonstration publique sur learn.noepora.fr/decouvrir.',
+    problem: 'Les outils de cartes mémoire demandent beaucoup de saisie manuelle et isolent les définitions du reste du cours, tandis que la génération libre par IA produit vite des hors-sujets ou des erreurs discrètes.',
+    solution: 'Découpage de cours sourcés avec renvois aux lignes exactes, quiz FSRS, carte interactive des notions, et laboratoires scientifiques basés sur des noyaux déterministes vérifiés.',
     architecture: [
-      'Ingestion : documents → découpage → embeddings → recherche vectorielle (pgvector)',
-      'Moteur de progression : SM-2 + signaux d\'erreurs (ajustement adaptatif)',
-      'Orchestration IA multi-provider : génération + fallback + contrôle des coûts',
-      'Quiz Engine : génération structurée (JSON) + validation de schéma',
-      'API + UI : endpoints REST, vues et retours utilisateur'
+      'Backend Python (FastAPI) avec tâches durables de génération et gestion de files',
+      'Base PostgreSQL avec recherche vectorielle (pgvector) reliée aux extraits de cours',
+      'Cascade multi-modèles (API distantes et modèles locaux via llama.cpp) avec validation JSON stricte',
+      'Frontend SvelteKit avec éditeur, lecteurs de fiches, quiz FSRS et carte des notions'
     ],
     demonstrations: [
-      'NLP/RAG : chunking, embeddings, recherche vectorielle, citations',
-      'Orchestration IA : multi-provider, rate limiting, fallback',
-      'Backend : API, modèles de données, migrations',
-      'Data : PostgreSQL + pgvector, requêtes et indexation',
-      'Produit : boucle feedback (révisions, erreurs, difficulté)'
+      'Validation continue par suite de tests backend et contrôles en navigateur réel',
+      'Vérification scientifique des laboratoires guidés avec modèles cloud et locaux',
+      'Démonstration publique accessible sans création de compte'
     ],
-    technologies: ['RAG', 'Répétition espacée', 'IA', 'Vector DB', 'Web', 'PostgreSQL'],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'pgvector', 'SvelteKit', 'FSRS', 'Docker', 'llama.cpp'],
     links: [
-      { label: 'App Live', url: 'https://app.smart-recall.app/' }
+      { label: 'Découvrir Noépora', url: 'https://learn.noepora.fr/decouvrir' }
+    ]
+  },
+  {
+    id: 'humuscope',
+    title: 'Humuscope',
+    subtitle: 'Un composteur connecté pour explorer la vie du sol',
+    category: 'iot',
+    status: 'deployed',
+    description: 'Composteur universitaire équipé de capteurs et d\'une transmission autonome LoRaWAN, accompagné du site pédagogique interactif en pixel art sur humuscope.noepora.fr.',
+    problem: 'Un composteur collectif évolue lentement et il est difficile à l\'œil nu de suivre son activité biologique ou de l\'expliquer simplement aux visiteurs.',
+    solution: 'Boîtier étanche à deux faces alimenté par batterie LiFePO4 et panneau solaire, collecte automatique de mesures et interface publique en deux niveaux de lecture (Simple et Scientifique).',
+    architecture: [
+      'ESP32 principal : préchauffe capteurs gaz MOS, lectures I2C (SCD41, AHT20), UART (CO, H2S) et RS485 Modbus',
+      'Liaison UART avec CRC vers Heltec WiFi LoRa 32 V3 en LoRaWAN EU868 (TTN -> MQTT)',
+      'Backend FastAPI + SQLite et frontend Svelte 5 sur humuscope.noepora.fr'
+    ],
+    demonstrations: [
+      'Séparation des trames de banc d\'établi et des relevés terrain (juillet-août 2026)',
+      'Suivi cohérent de l\'assèchement sur plusieurs capteurs indépendants',
+      'Affichage strict des données manquantes sans valeur artificielle'
+    ],
+    technologies: ['ESP32', 'Heltec LoRa 32 V3', 'LoRaWAN', 'TTN / MQTT', 'SCD41', 'RS485', 'FastAPI', 'SQLite', 'Svelte'],
+    links: [
+      { label: 'Explorer Humuscope', url: 'https://humuscope.noepora.fr' }
+    ]
+  },
+  {
+    id: 'insect-vision',
+    title: 'SmartHive & vision des insectes',
+    subtitle: 'De la ruche connectée à la vision par ordinateur appliquée aux insectes',
+    category: 'bio',
+    status: 'prototype',
+    description: 'SmartHive associe une ruche instrumentée à la détection vidéo d\'abeilles et de frelons (FabLab Valrose). En parallèle, travaux au Centre Inria d\'Université Côte d\'Azur (équipe STARS) sur la détection, le suivi vidéo, la réidentification et l\'auto-entraînement.',
+    problem: 'Surveiller une ruche ou analyser des pollinisateurs sur vidéo demande des modèles fiables sous de nouvelles conditions de lumière et sur différents sites sans réannoter chaque jeu de données.',
+    solution: 'Chaîne SmartHive temps réel (LoRaWAN + YOLO/NCNN sur Raspberry Pi) et protocoles Inria reproductibles séparant strictement mise au point et validation externe.',
+    architecture: [
+      'SmartHive : capteurs LoRaWAN (ABP -> TTN -> MQTT), backend FastAPI + WebSocket, inférence YOLO/NCNN sur Raspberry Pi 4, UI SvelteKit',
+      'Inria (équipe STARS) : modules séparés pour détection, suivi temporel, réidentification et sélection active'
+    ],
+    demonstrations: [
+      'SmartHive : entraînement sur Bee-Hornet-Detect et export quantifié NCNN/TFLite INT8',
+      'Inria : protocoles multi-graines et comparaisons contrôlées inter-sites (données internes confidentielles)'
+    ],
+    technologies: ['Python', 'PyTorch', 'YOLO / NCNN', 'OpenCV', 'FastAPI', 'SvelteKit', 'LoRaWAN'],
+    links: [
+      { label: 'Voir SmartHive sur GitHub', url: 'https://github.com/CypreRask/Ruche-public' }
     ]
   },
   {
     id: 'sismographe',
-    title: 'Sismographe Universitaire',
-    subtitle: 'Réparation & mise en ligne des données',
+    title: 'Sismographe universitaire',
+    subtitle: 'Remettre en service un instrument scientifique',
     category: 'iot',
     status: 'deployed',
-    description: 'Au sein du fablab, le laboratoire Géoazur (UniCA) a confié des sismographes à remettre en état et à connecter pour rendre les données accessibles. Un travail initial avait été mené par Irem Su Cone sur un sismographe fonctionnel ; ensuite, j\'ai remis en route la chaîne côté acquisition et exploitation des données : réparation d\'un sismographe mécaniquement cassé, amélioration du programme d\'acquisition (Python), sortie des données via MQTT et construction d\'une interface web de visualisation. Puis, avec Didier Orlandi (encadrement) et Alex (base de données), l\'ensemble a été porté sur Raspberry Pi avec persistance en MariaDB. Le site public final a été réalisé par Didier Orlandi à partir de ma base web et est maintenant en ligne.',
-    problem: 'Instrument(s) non opérationnel(s) et données difficilement accessibles. Objectif : remettre en service, extraire les mesures et les rendre consultables via le web pour l\'enseignement.',
-    solution: 'Réparation + acquisition (Python), publication des mesures via MQTT, persistance sur Raspberry Pi (MariaDB) et visualisation web.',
+    description: 'Projet collectif de L2 consacré à la remise en état d\'un sismographe universitaire, depuis le diagnostic matériel et la chaîne d\'acquisition jusqu\'à la visualisation et la transmission des mesures.',
+    problem: 'Instrument non opérationnel et mesures difficiles à consulter pour l\'enseignement.',
+    solution: 'Remise en état de la chaîne d\'acquisition physique sur Raspberry Pi et transmission vers le serveur universitaire.',
     architecture: [
-      'Réparation mécanique (sismographe cassé) + remise en service',
-      'Acquisition/formatage des mesures (Python)',
-      'Publication des données via MQTT',
-      'Raspberry Pi : déploiement et persistance',
-      'Base de données : MariaDB (mise en place Alex)',
-      'Interface web : visualisation (base initiale), puis site public final par Didier Orlandi'
+      'Remise en état matériel et chaîne d\'acquisition',
+      'Déploiement sur Raspberry Pi',
+      'Transmission vers le serveur universitaire (hors réseau campus actuellement inaccessible)'
     ],
     demonstrations: [
-      'Réparation : remise en état d\'un instrument mécaniquement cassé',
-      'Intégration bout-en-bout : acquisition → MQTT → stockage → web',
-      'Web : monitoring et visualisation',
-      'Collaboration : coordination fablab ↔ labo ↔ encadrement'
+      'Capteur remis en service et courbe d\'acquisition en direct'
     ],
-    technologies: ['Réparation', 'Raspberry Pi', 'MQTT', 'MariaDB', 'Monitoring web', 'Université'],
-    links: [
-      { label: 'Site public (UniCA)', url: 'https://eftis.univ-cotedazur.fr/sismographe/' }
-    ]
-  },
-  {
-    id: 'maquette-neurone',
-    title: 'Maquette Neurone',
-    subtitle: 'Pédagogie — sommation spatio-temporelle',
-    category: 'bio',
-    status: 'wip',
-    description: 'Maquette pédagogique tangible pour enseigner la sommation spatio-temporelle neuronale. Système modulaire avec dendrites à connexions magnétiques, modules synaptiques excitateurs/inhibiteurs interchangeables, circuit de sommation analogique, et visualisation LED du potentiel de membrane. Conçue pour ateliers de vulgarisation scientifique (lycéens, grand public).',
-    problem: 'La neurophysiologie (potentiel d\'action, sommation synaptique, seuil d\'activation) est difficile à visualiser et enseigner sans abstraction mathématique. Les schémas 2D ne permettent pas de manipuler physiquement les concepts.',
-    solution: 'Maquette interactive modulaire : Dendrites physiques avec connexions magnétiques (repositionnement libre), Modules synaptiques codés couleur (vert = excitateur, rouge = inhibiteur), Circuit de sommation spatio-temporelle avec condensateur (intégration temporelle), LEDs progressives pour visualiser le potentiel de membrane.',
-    architecture: [
-      'Corps cellulaire : circuit de sommation + LEDs potentiel de membrane',
-      'Dendrites modulaires avec connexions magnétiques (plug & play)',
-      'Modules synaptiques : générateurs de signaux excitateurs/inhibiteurs',
-      'Circuit RC pour intégration spatio-temporelle (condensateur)',
-      'Détecteur de seuil + propagation axonale (simulation)',
-      'Design mécanique : support, aimants, câblage modulaire'
-    ],
-    demonstrations: [
-      'Électronique : circuits analogiques, LEDs, gestion alimentation',
-      'Pédagogie : vulgarisation scientifique, design d\'expérience tangible',
-      'Conception mécanique : modularité, assemblage magnétique, ergonomie',
-      'Biologie appliquée : modélisation physique de processus neurophysiologiques',
-      'UX éducative : feedback visuel immédiat, manipulation intuitive'
-    ],
-    technologies: ['Maquette interactive', 'Pédagogie', 'Neurophysiologie', 'Électronique analogique', 'Conception modulaire'],
+    technologies: ['Instrumentation', 'Raspberry Pi', 'Électronique', 'Acquisition'],
     links: []
   },
   {
-    id: 'portfolio-tracker',
-    title: 'Portfolio Tracker',
-    subtitle: 'Architecture Event-Driven & IA Multi-Provider',
-    category: 'finance',
+    id: 'neurone',
+    title: 'Maquette Neurone',
+    subtitle: 'Une maquette interactive pour la Semaine du Cerveau',
+    category: 'bio',
     status: 'deployed',
-    isSensitive: true,
-    description: 'Application privée de suivi de portefeuille (multi-comptes) avec historisation d\'événements, vues de lecture (CQRS) et analyse assistée par IA. Objectif : un outil sur mesure, maîtrisé de bout en bout, qui reflète exactement mes règles et mes besoins.',
-    problem: 'Je voulais un système sur mesure et contrôlable : règles explicites, traçabilité complète des décisions, et automatisations adaptées à ma façon de suivre le portefeuille.',
-    solution: 'Architecture Event Sourcing pour une auditabilité forte (journal d\'événements en JSONL) couplée à un moteur de décision hybride (règles + IA). Utilisation du pattern CQRS pour la performance et d\'une orchestration multi-provider pour l\'analyse.',
+    description: 'Conception au FabLab Valrose d\'une maquette de neurone imprimée en 3D avec dendrites aimantées, électronique intégrée et visualisation des signaux sur interface web, utilisée lors de la Semaine du Cerveau.',
+    problem: 'Rendre tangible le fonctionnement d\'un neurone et la sommation des signaux pour le grand public.',
+    solution: 'Maquette imprimée en 3D avec dendrites magnétiques, électronique interne du soma sur Arduino/C++ et interface web temps réel.',
     architecture: [
-      'Event Store : transactions JSONL immuables + hashing',
-      'CQRS : séparation Write / Read (vues matérialisées)',
-      'Analyse IA multi-provider : synthèse et aide à la décision (selon règles)',
-      'Moteur de règles : alertes, garde-fous, scénarios de rééquilibrage',
-      'Frontend : dashboard web'
+      'Modélisation et impression 3D du soma et des dendrites aimantées',
+      'Électronique interne du soma et microcontrôleur Arduino / C++',
+      'Interface web de visualisation temps réel'
     ],
     demonstrations: [
-      'Backend : Architecture Event Sourcing & CQRS pure',
-      'IA : Orchestration multi-provider (fallback, circuit breaker si besoin)',
-      'Data Engineering : validation stricte (Pydantic), traçabilité',
-      'Finance : Modélisation multi-devises & Audit trail complet',
-      'DevOps : Gestion de la persistance fichier (JSONL) vs Base de données'
+      'Ateliers interactifs en conditions réelles lors de la Semaine du Cerveau'
     ],
-    technologies: ['Finance', 'Event Sourcing', 'CQRS', 'Reporting', 'IA', 'Python'],
+    technologies: ['Électronique', 'Modélisation 3D', 'Arduino / C++', 'Interface Web'],
+    links: []
+  },
+  {
+    id: 'pythia-midas',
+    title: 'Pythia & Héphaïstos / MIDAS',
+    subtitle: 'Outils personnels : assistant IA local et suivi patrimonial',
+    category: 'systems',
+    status: 'wip',
+    isSensitive: true,
+    description: 'Projets personnels en dépôts privés : Pythia & Héphaïstos (assistant local vocal et visuel sous llama.cpp et ESP32-S3/ESP32-CAM) et MIDAS (application locale de suivi patrimonial et simulations quantitatives).',
+    problem: 'Expérimenter des assistants locaux multi-modaux et des outils d\'analyse financière ajustée à l\'inflation sur des données privées.',
+    solution: 'Pipelines locaux Python, llama.cpp, FastAPI et SvelteKit dédiés à un usage personnel.',
+    architecture: [
+      'Pythia & Héphaïstos : Python, llama.cpp, enceinte ESP32-S3 et caméra ESP32-CAM',
+      'MIDAS : FastAPI, SvelteKit, méthodes de prévision ML et LLM'
+    ],
+    demonstrations: [
+      'Dépôts et données maintenus privés'
+    ],
+    technologies: ['Python', 'llama.cpp', 'ESP32-S3', 'FastAPI', 'SvelteKit', 'Machine Learning'],
     links: []
   }
 ];
@@ -223,57 +185,49 @@ export const systemStages: SystemStage[] = [
     id: 'energy',
     label: 'Énergie',
     icon: 'Zap',
-    description: 'Gestion énergétique, MOSFET, sleep, préchauffe',
+    description: 'Autonomie solaire, batterie LiFePO4 et mise en veille',
     color: '#f59e0b',
-    projectIds: ['composteur-v2', 'ruche-jpo', 'sismographe']
+    projectIds: ['humuscope', 'insect-vision', 'sismographe']
   },
   {
     id: 'sensors',
     label: 'Capteurs',
     icon: 'Activity',
-    description: 'Acquisition, multiplexage, conditionnement',
+    description: 'Acquisition I2C, UART, RS485 et instrumentation physique',
     color: '#10b981',
-    projectIds: ['composteur-v2', 'ruche-jpo', 'sismographe']
+    projectIds: ['humuscope', 'insect-vision', 'sismographe', 'neurone']
   },
   {
     id: 'network',
     label: 'Réseau',
     icon: 'Radio',
-    description: 'LoRaWAN OTAA/ABP, TTN, MQTT',
+    description: 'LoRaWAN EU868, TTN et MQTT',
     color: '#3b82f6',
-    projectIds: ['composteur-v2', 'ruche-jpo']
+    projectIds: ['humuscope', 'insect-vision']
   },
   {
     id: 'backend',
     label: 'Backend/API',
     icon: 'Server',
-    description: 'FastAPI, SQLModel, WebSocket, REST',
+    description: 'FastAPI, PostgreSQL/pgvector, SQLite et WebSocket',
     color: '#8b5cf6',
-    projectIds: ['composteur-v2', 'ruche-jpo', 'smartrecall-v2', 'portfolio-tracker']
+    projectIds: ['noepora', 'humuscope', 'insect-vision', 'pythia-midas']
   },
   {
     id: 'data',
-    label: 'Data/ML/IA',
+    label: 'Data/IA/Vision',
     icon: 'Brain',
-    description: 'Embeddings, RAG, clustering, prédiction',
+    description: 'Vision par ordinateur (PyTorch/YOLO), modèles locaux et vérification',
     color: '#ec4899',
-    projectIds: ['composteur-v2', 'ruche-jpo', 'smartrecall-v2', 'portfolio-tracker', 'sismographe']
+    projectIds: ['noepora', 'humuscope', 'insect-vision', 'pythia-midas']
   },
   {
     id: 'interface',
     label: 'Interface',
     icon: 'Monitor',
-    description: 'Svelte/SvelteKit, temps réel, UX',
+    description: 'SvelteKit, React et visualisation pédagogique',
     color: '#06b6d4',
-    projectIds: ['composteur-v2', 'ruche-jpo', 'smartrecall-v2', 'portfolio-tracker']
-  },
-  {
-    id: 'action',
-    label: 'Action',
-    icon: 'Target',
-    description: 'Orchestration, décision, automatisation',
-    color: '#ef4444',
-    projectIds: ['smartrecall-v2', 'portfolio-tracker']
+    projectIds: ['noepora', 'humuscope', 'insect-vision', 'neurone', 'pythia-midas']
   }
 ];
 
@@ -281,70 +235,70 @@ export const systemStages: SystemStage[] = [
 // SKILLS DATA
 // ============================================
 
-export const skills = [
+export const skills: Skill[] = [
   {
     id: 'bio',
-    label: 'Biologie & Vivant',
+    label: 'Biologie et expérimentation',
     icon: 'Dna',
-    description: 'Compréhension des systèmes vivants complexes (microbiologie, écologie). Capacité à traduire des processus biologiques en contraintes techniques (ex: cycle du compost → capteurs NPK/gaz, comportement abeilles → détection IA).'
+    description: 'Conception de dispositifs et de méthodes pour observer, mesurer et analyser des phénomènes biologiques.'
+  },
+  {
+    id: 'vision',
+    label: 'Vision par ordinateur',
+    icon: 'Eye',
+    description: 'Détection, suivi et réidentification d\'objets sur vidéo en Python et PyTorch, évaluations comparatives et analyse des limites expérimentales.'
   },
   {
     id: 'hardware',
-    label: 'Hardware',
+    label: 'Électronique et systèmes embarqués',
     icon: 'Cpu',
-    description: 'Conception de systèmes embarqués low-power : gestion énergie (MOSFET, sleep modes), multiplexage capteurs, conditionnement analogique. ESP32, LoRa, RS485.'
+    description: 'Prototypage de dispositifs de mesure, intégration de capteurs, communication sans fil et acquisition sur ESP32, Arduino et Raspberry Pi.'
   },
   {
-    id: 'rf',
-    label: 'RF / LoRaWAN',
-    icon: 'Radio',
-    description: 'Expérience LoRaWAN end-to-end : OTAA/ABP, payload encoding/decoding, intégration TTN → MQTT. Gestion des contraintes RF (portée, débit, énergie).'
+    id: 'software',
+    label: 'Développement logiciel et données',
+    icon: 'Code',
+    description: 'Développement d\'applications web complètes, de leurs interfaces aux services backend, stockage et pipelines de données.'
   },
   {
-    id: 'backend',
-    label: 'Backend / API',
-    icon: 'Server',
-    description: 'Architecture d\'APIs (FastAPI) : REST + WebSocket temps réel, modèles de données (SQLModel), gestion de flux asynchrones. Pensé pour rester maintenable et extensible.'
+    id: 'ai',
+    label: 'Intelligence artificielle',
+    icon: 'Compass',
+    description: 'Intégration de modèles locaux (llama.cpp) et distants, expérimentation de pipelines de génération et contrôles de fiabilité.'
   },
   {
-    id: 'data',
-    label: 'Data / IA',
-    icon: 'BarChart3',
-    description: 'Pipelines de données bout-en-bout : collecte IoT → stockage → analyse. Intégration IA supervisée (YOLO pour vision, ML pour séries temporelles). IA utilisée pour accélérer le prototypage.'
-  },
-  {
-    id: 'ux',
-    label: 'UX / Frontend',
-    icon: 'Monitor',
-    description: 'Dashboards de monitoring et interfaces de projet : intégration, corrections et livraison d\'une UI maintenable, souvent avec copilote IA pour accélérer (Svelte/React selon le besoin).'
+    id: 'fablab',
+    label: 'Impression 3D et prototypage',
+    icon: 'Layers',
+    description: 'Conception CAO, fabrication additive, intégration électronique et accompagnement de projets au FabLab Valrose.'
   }
 ];
 
 // ============================================
-// HIGHLIGHTS DATA (sans stats inventées)
+// HIGHLIGHTS DATA
 // ============================================
 
 export const highlights = [
   {
-    id: 'real-systems',
-    title: 'Ancrage Physique',
-    subtitle: 'Conception sous Contraintes',
-    description: 'Je ne produis pas de code abstrait. Mes architectures, même au stade de prototype, intègrent les frictions du monde réel : limites énergétiques, instabilité réseau et complexité biologique.',
-    icon: 'Cpu'
-  },
-  {
-    id: 'ai-component',
-    title: 'Orchestration IA',
-    subtitle: 'Conception vs Exécution',
-    description: 'J\'utilise l\'IA comme copilote pour itérer vite (frontend, backend, docs). Je garde le contrôle sur l\'architecture, les choix techniques, les tests et la cohérence du système.',
-    icon: 'Network'
-  },
-  {
-    id: 'bio-pedagogy',
-    title: 'Pédagogie Bio',
-    subtitle: 'Comprendre le vivant',
-    description: 'La biologie et l\'informatique se nourrissent mutuellement. Des maquettes tangibles aux simulations, je rends le vivant compréhensible.',
+    id: 'bio-info',
+    title: 'Bio-informatique · L3',
+    subtitle: 'Université Côte d\'Azur',
+    description: 'Licence Sciences de la Vie, parcours Bio-informatique à Nice : biologie, génomique, bio-informatique et programmation.',
     icon: 'Dna'
+  },
+  {
+    id: 'inria-stars',
+    title: 'Inria · Équipe STARS',
+    subtitle: 'Vision par ordinateur',
+    description: 'Stage d\'avril à août 2026 puis collaboration extérieure depuis septembre 2026 sur la vision appliquée aux abeilles et insectes.',
+    icon: 'Eye'
+  },
+  {
+    id: 'web-iot',
+    title: 'Web & IoT',
+    subtitle: 'Démos & capteurs',
+    description: 'Des applications web déployées (Noépora, Humuscope) aux prototypes matériels au FabLab Valrose et pour la Mission Éco-Responsable.',
+    icon: 'Cpu'
   }
 ];
 
@@ -354,20 +308,20 @@ export const highlights = [
 
 export const personalInfo = {
   name: 'Mathis Steinmann',
-  title: 'Étudiant L2 Sciences de la Vie',
+  title: 'Étudiant en L3 Bio-informatique',
   subtitle: 'Université Côte d\'Azur (Nice)',
-  tagline: 'Je conçois des systèmes complets sous contraintes (IoT, données, vivant) et je les fais converger jusqu\'à une démo utilisable. J\'utilise l\'IA comme copilote pour accélérer l\'implémentation, tout en gardant la responsabilité de l\'intégration, du debug et de la validation.',
+  tagline: 'Je développe des projets à la croisée de la biologie, de l\'informatique et de l\'électronique. Vision par ordinateur, intelligence artificielle, capteurs, applications web ou impression 3D : j\'aime autant comprendre un phénomène que construire les outils permettant de l\'étudier.',
   location: 'Nice, France',
   email: 'mathis.steinmann@outlook.fr',
   github: 'github.com/CypreRask',
-  linkedin: 'linkedin.com/in/mathis-steinmann-93b5851b9',
-  availability: 'En recherche de défis techniques'
+  linkedin: 'linkedin.com/in/steinmann-mathis',
+  availability: 'Disponible pour échanger autour d\'un projet scientifique, d\'une collaboration ou d\'un stage'
 };
 
 export const heroStats = [
-  { value: '5+', label: 'Projets' },
-  { value: 'IoT / IA / Bio', label: 'Domaines' },
-  { value: 'Nice, FR', label: 'Localisation' }
+  { value: 'Bio-info · L3', label: 'Université Côte d\'Azur' },
+  { value: 'Inria · STARS', label: 'Vision par ordinateur' },
+  { value: 'Web & IoT', label: 'Démos & capteurs' }
 ];
 
 // ============================================
@@ -375,9 +329,8 @@ export const heroStats = [
 // ============================================
 
 export const navItems = [
-  { label: 'Accueil', href: '#hero' },
-  { label: 'Compétences', href: '#skills' },
-  { label: 'Architecture', href: '#system-map' },
   { label: 'Projets', href: '#projects' },
+  { label: 'Savoir-faire', href: '#skills' },
+  { label: 'Parcours', href: '#background' },
   { label: 'Contact', href: '#contact' }
 ];
